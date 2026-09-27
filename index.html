@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ragab Samir — Data Intelligence Portfolio</title>
+<meta name="description" content="Ragab Samir, Junior Data Analyst — BI dashboards, financial diagnostics, and revenue analytics built in Power BI." />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg-void:#0B0F17;
+    --bg-panel:#0F172A;
+    --bg-panel-2:#111C33;
+    --border-glass:rgba(148,163,184,0.14);
+    --border-glass-hi:rgba(148,163,184,0.28);
+    --cyan:#22D3EE;
+    --emerald:#34D399;
+    --amber:#F5B942;
+    --text-hi:#E7ECF3;
+    --text-mid:#93A2B8;
+    --text-low:#5B6B85;
+  }
+  *{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-void);
+    color:var(--text-hi);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .font-display{font-family:'Space Grotesk',sans-serif;}
+  .font-mono{font-family:'IBM Plex Mono',monospace;}
+
+  /* Background texture */
+  .bg-grid{
+    background-image:
+      linear-gradient(rgba(148,163,184,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148,163,184,0.05) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  }
+  .glow-orb{
+    position:absolute;
+    border-radius:9999px;
+    filter:blur(120px);
+    opacity:0.22;
+    pointer-events:none;
+  }
+
+  /* Glass panels */
+  .glass{
+    background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+    border:1px solid var(--border-glass);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+  }
+  .glass-hover{transition:border-color .35s ease, transform .35s ease, box-shadow .35s ease;}
+  .glass-hover:hover{
+    border-color:var(--border-glass-hi);
+    transform:translateY(-4px);
+    box-shadow:0 20px 60px -20px rgba(34,211,238,0.15);
+  }
+
+  .grad-border{
+    position:relative;
+    border-radius:1.25rem;
+  }
+  .grad-border::before{
+    content:"";
+    position:absolute;inset:0;
+    border-radius:inherit;
+    padding:1px;
+    background:linear-gradient(135deg, rgba(34,211,238,0.55), rgba(52,211,153,0.15) 40%, rgba(34,211,238,0.05) 70%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+    opacity:0.7;
+  }
+
+  .text-gradient{
+    background:linear-gradient(100deg,#22D3EE 0%, #67E8B0 55%, #34D399 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--bg-void);}
+  ::-webkit-scrollbar-thumb{background:#1E293B;border-radius:8px;border:2px solid var(--bg-void);}
+  ::-webkit-scrollbar-thumb:hover{background:#2A3B55;}
+
+  /* Nav */
+  #navbar{transition:background-color .4s ease, border-color .4s ease, padding .4s ease;}
+  #navbar.scrolled{
+    background:rgba(11,15,23,0.72);
+    border-bottom:1px solid var(--border-glass);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+  }
+  .nav-link{position:relative;color:var(--text-mid);transition:color .25s ease;}
+  .nav-link::after{
+    content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;
+    background:linear-gradient(90deg,var(--cyan),var(--emerald));
+    transition:width .3s ease;
+  }
+  .nav-link:hover{color:var(--text-hi);}
+  .nav-link:hover::after{width:100%;}
+
+  /* Buttons */
+  .btn-primary{
+    background:linear-gradient(100deg,#22D3EE,#34D399);
+    color:#04121A;
+    font-weight:600;
+    transition:filter .25s ease, transform .25s ease;
+  }
+  .btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}
+  .btn-ghost{
+    border:1px solid var(--border-glass-hi);
+    color:var(--text-hi);
+    transition:border-color .25s ease, background-color .25s ease;
+  }
+  .btn-ghost:hover{border-color:var(--cyan);background:rgba(34,211,238,0.06);}
+
+  /* KPI counters */
+  .kpi-figure{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;}
+
+  /* Filter pills */
+  .filter-pill{
+    border:1px solid var(--border-glass);
+    color:var(--text-mid);
+    transition:all .25s ease;
+  }
+  .filter-pill.active{
+    border-color:transparent;
+    background:linear-gradient(100deg,#22D3EE,#34D399);
+    color:#04121A;
+    font-weight:600;
+  }
+  .filter-pill:not(.active):hover{border-color:var(--border-glass-hi);color:var(--text-hi);}
+
+  /* Project card fade for filtering */
+  .project-card{transition:opacity .35s ease, transform .35s ease;}
+  .project-card.hidden-card{
+    opacity:0;
+    transform:scale(0.96);
+    position:absolute;
+    pointer-events:none;
+    height:0;overflow:hidden;
+  }
+
+  /* Image fallback frame */
+  .img-frame{position:relative;background:radial-gradient(circle at 30% 20%, #16233B, #0B1220 70%);}
+  .img-frame .img-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;}
+  .img-frame .img-placeholder span{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--text-low);letter-spacing:.05em;}
+	  .img-frame img{position:relative;z-index:1;transition:opacity .3s ease;}
+	  .img-frame img.img-broken{opacity:0 !important;}
+
+	  /* Profile portrait */
+	  .profile-photo{
+	    position:relative;
+	    isolation:isolate;
+	    box-shadow:0 24px 70px -28px rgba(34,211,238,0.55);
+	  }
+	  .profile-photo::before{
+	    content:"";
+	    position:absolute;inset:-1px;
+	    border-radius:inherit;
+	    background:linear-gradient(135deg,rgba(34,211,238,0.85),rgba(52,211,153,0.28) 55%,rgba(34,211,238,0.08));
+	    z-index:-1;
+	  }
+	  .profile-photo::after{
+	    content:"";
+	    position:absolute;inset:0;
+	    border-radius:inherit;
+	    background:linear-gradient(180deg,transparent 55%,rgba(11,15,23,0.72));
+	    pointer-events:none;
+	  }
+
+	  /* Tech pill tooltip */
+  .tech-pill{
+    position:relative;
+    border:1px solid var(--border-glass);
+    transition:border-color .25s ease, background-color .25s ease, transform .25s ease;
+  }
+  .tech-pill:hover{border-color:var(--emerald);background:rgba(52,211,153,0.06);transform:translateY(-2px);}
+  .tech-tooltip{
+    position:absolute;
+    bottom:calc(100% + 10px);
+    left:50%;
+    transform:translateX(-50%) translateY(6px);
+    width:230px;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .2s ease, transform .2s ease;
+    z-index:40;
+    pointer-events:none;
+  }
+  .tech-pill:hover .tech-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+
+  /* Modal */
+  .modal-backdrop{
+    background:rgba(5,8,14,0.78);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+  }
+  .modal-panel{
+    transition:transform .35s cubic-bezier(.16,1,.3,1), opacity .35s ease;
+  }
+  .modal-hidden .modal-panel{transform:translateY(24px) scale(.98);opacity:0;}
+  .modal-hidden{opacity:0;pointer-events:none;}
+  .modal-visible{opacity:1;}
+  .modal-visible .modal-panel{transform:translateY(0) scale(1);opacity:1;}
+
+  .tab-btn{color:var(--text-mid);border-bottom:2px solid transparent;transition:color .2s ease, border-color .2s ease;}
+  .tab-btn.active{color:var(--text-hi);border-color:var(--cyan);}
+
+  /* Range sliders */
+  input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;}
+  input[type=range]::-webkit-slider-runnable-track{
+    height:6px;border-radius:6px;
+    background:linear-gradient(90deg, rgba(34,211,238,0.5), rgba(52,211,153,0.5));
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;
+    width:18px;height:18px;border-radius:50%;
+    background:#fff;
+    border:3px solid var(--cyan);
+    margin-top:-6px;
+    cursor:pointer;
+    box-shadow:0 0 0 4px rgba(34,211,238,0.15);
+  }
+  input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:rgba(148,163,184,0.2);}
+  input[type=range]::-moz-range-thumb{
+    width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--cyan);cursor:pointer;
+  }
+
+  /* Toast */
+  #toast{
+    transition:transform .35s cubic-bezier(.16,1,.3,1), opacity .35s ease;
+    transform:translateY(140%);
+    opacity:0;
+  }
+  #toast.show{transform:translateY(0);opacity:1;}
+
+  /* Timeline */
+  .timeline-line{background:linear-gradient(180deg, rgba(34,211,238,0.5), rgba(52,211,153,0.05));}
+  .timeline-dot{box-shadow:0 0 0 4px rgba(11,15,23,1), 0 0 0 5px var(--border-glass);}
+
+  /* Availability pulse */
+  .pulse-dot{position:relative;}
+  .pulse-dot::after{
+    content:"";position:absolute;inset:0;border-radius:9999px;
+    background:var(--emerald);
+    animation:pulse-ring 2s cubic-bezier(0.4,0,0.6,1) infinite;
+  }
+  @keyframes pulse-ring{0%{transform:scale(1);opacity:.7;}100%{transform:scale(2.6);opacity:0;}}
+
+  .fade-up{animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+  input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible{
+    outline:2px solid var(--cyan);outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============ BACKGROUND LAYER ============ -->
+<div class="fixed inset-0 -z-10 bg-grid"></div>
+<div class="glow-orb w-[500px] h-[500px] bg-cyan-400 top-[-100px] left-[-100px]"></div>
+<div class="glow-orb w-[420px] h-[420px] bg-emerald-400 top-[300px] right-[-140px]"></div>
+<div class="glow-orb w-[380px] h-[380px] bg-cyan-300 bottom-[-100px] left-[30%]"></div>
+
+<!-- ============ NAVBAR ============ -->
+	<nav id="navbar" class="fixed top-0 inset-x-0 z-50">
+	  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+	    <a href="#top" class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight">
+	      <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-[#04121A] text-sm font-bold">RS</span>
+	      <span class="hidden sm:inline text-slate-200">Ragab Samir <span class="text-slate-500 font-normal">|</span> Data Analyst</span>
+	    </a>
+
+    <div class="hidden lg:flex items-center gap-8 text-sm">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#case-studies" class="nav-link">Case Studies</a>
+      <a href="#calculator" class="nav-link">Impact Calculator</a>
+      <a href="#tech-stack" class="nav-link">Tech Stack</a>
+      <a href="#credentials" class="nav-link">Certifications</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="#contact" class="hidden sm:inline-flex btn-primary text-sm px-4 py-2.5 rounded-lg">Book a Consultation</a>
+      <button id="menuToggle" class="lg:hidden w-10 h-10 rounded-lg glass flex items-center justify-center" aria-label="Toggle menu" aria-expanded="false">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="lg:hidden hidden glass border-t border-white/5 px-6 py-5 flex flex-col gap-4 text-sm">
+    <a href="#about" class="nav-link">About</a>
+    <a href="#case-studies" class="nav-link">Case Studies</a>
+    <a href="#calculator" class="nav-link">Impact Calculator</a>
+    <a href="#tech-stack" class="nav-link">Tech Stack</a>
+    <a href="#credentials" class="nav-link">Certifications</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#contact" class="btn-primary text-center px-4 py-2.5 rounded-lg mt-1">Book a Consultation</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header id="top" class="relative pt-40 pb-24 lg:pt-48 lg:pb-32 px-6 lg:px-10">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.15fr_0.85fr] gap-14 items-center">
+    <div class="fade-up">
+      <div class="inline-flex items-center gap-2 text-xs font-mono text-emerald-300 border border-emerald-400/25 bg-emerald-400/5 rounded-full px-3 py-1.5 mb-6">
+        <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        Available for opportunities
+      </div>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] font-semibold text-slate-100 max-w-2xl">
+        Turning commercial instinct and financial rigor into dashboards that find where the money leaks.
+      </h1>
+      <p class="mt-6 text-slate-400 text-lg max-w-xl leading-relaxed">
+        I'm Ragab Samir — seven years running showroom accounts, SEO campaigns, and communities before moving into Power BI. That background means I build models around what a business actually decides on, not just what the data happens to contain.
+      </p>
+
+      <div class="mt-9 flex flex-wrap gap-4">
+        <a href="#case-studies" class="btn-primary px-6 py-3.5 rounded-lg text-sm inline-flex items-center gap-2">
+          Explore Projects <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <a href="#contact" class="btn-ghost px-6 py-3.5 rounded-lg text-sm">Contact Me</a>
+      </div>
+
+      <div class="mt-14 grid grid-cols-3 gap-6 max-w-lg">
+        <div>
+          <div class="font-display text-2xl sm:text-3xl text-slate-100 kpi-figure"><span data-count-to="7" data-suffix="+">0</span></div>
+          <div class="text-xs text-slate-500 mt-1 leading-snug">Years operations &amp; growth</div>
+        </div>
+        <div>
+          <div class="font-display text-2xl sm:text-3xl text-slate-100">DEPI</div>
+          <div class="text-xs text-slate-500 mt-1 leading-snug">Data Analysis Track Scholar</div>
+        </div>
+        <div>
+          <div class="font-display text-2xl sm:text-3xl text-slate-100 kpi-figure"><span data-count-to="10" data-suffix="+">0</span></div>
+          <div class="text-xs text-slate-500 mt-1 leading-snug">End-to-end BI pipelines</div>
+        </div>
+      </div>
+    </div>
+
+	    <!-- Live metric stack -->
+	    <div class="relative fade-up" style="animation-delay:.15s">
+	      <div class="profile-photo rounded-[1.5rem] overflow-hidden max-w-[22rem] mx-auto mb-8 border border-cyan-300/30 bg-slate-900">
+	        <img src="images/ragab-samir-profile.jfif" alt="Ragab Samir — Data Analyst" class="block w-full aspect-square object-cover object-center" loading="eager">
+	        <div class="absolute inset-x-0 bottom-0 z-10 p-5">
+	          <div class="text-xs font-mono text-emerald-300 tracking-wider uppercase">Data Analyst</div>
+	          <div class="font-display text-xl text-white mt-1">Ragab Samir</div>
+	        </div>
+	      </div>
+	      <div class="grad-border glass rounded-[1.25rem] p-6 sm:p-7 relative overflow-hidden">
+        <div class="flex items-center justify-between mb-5">
+          <span class="text-xs font-mono text-slate-500 tracking-wide">LIVE PORTFOLIO METRICS</span>
+          <i data-lucide="activity" class="w-4 h-4 text-emerald-400"></i>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between border-b border-white/5 pb-4">
+            <div>
+              <div class="text-xs text-slate-500">Net Revenue Analyzed</div>
+              <div class="font-display text-2xl text-cyan-300 kpi-figure">$<span data-count-to="30.09" data-decimals="2">0</span>M</div>
+            </div>
+            <i data-lucide="trending-up" class="w-5 h-5 text-cyan-400"></i>
+          </div>
+          <div class="flex items-center justify-between border-b border-white/5 pb-4">
+            <div>
+              <div class="text-xs text-slate-500">Deposits &amp; Balances Modeled</div>
+              <div class="font-display text-2xl text-emerald-300 kpi-figure">EGP <span data-count-to="3.65" data-decimals="2">0</span>B</div>
+            </div>
+            <i data-lucide="landmark" class="w-5 h-5 text-emerald-400"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-xs text-slate-500">Efficiency Lift Delivered</div>
+              <div class="font-display text-2xl text-slate-100 kpi-figure"><span data-count-to="35">0</span>%</div>
+            </div>
+            <i data-lucide="gauge" class="w-5 h-5 text-slate-300"></i>
+          </div>
+        </div>
+      </div>
+      <div class="absolute -bottom-5 -right-4 glass rounded-xl px-4 py-3 text-xs font-mono text-slate-400 hidden sm:block">
+        <span class="text-emerald-400">●</span> Power BI · DAX · Power Query
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="relative px-6 lg:px-10 py-20 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-14">
+    <div>
+      <h2 class="font-display text-3xl text-slate-100 max-w-sm">From showroom ledgers to star schemas</h2>
+      <p class="mt-5 text-slate-400 leading-relaxed max-w-md">
+        Before Power BI, I managed the books for a housewares showroom, ran SEO for sites pulling 150K monthly visitors, and moderated a community of over a million people. Every one of those roles came down to the same question: what changed, and why does it matter to the person paying attention.
+      </p>
+      <p class="mt-4 text-slate-400 leading-relaxed max-w-md">
+        That's the lens I bring to data modeling now — star schemas built around business questions, DAX written for the metric a stakeholder will actually ask about, and dashboards that lead with the number that explains the trend, not just the trend itself.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div class="glass glass-hover rounded-xl p-6">
+        <i data-lucide="calculator" class="w-5 h-5 text-cyan-400 mb-3"></i>
+        <div class="font-display text-slate-100 mb-1">Accounting rigor</div>
+        <p class="text-sm text-slate-500 leading-relaxed">Years of hands-on financial reporting and inventory audits, run at 100% precision on live showroom books.</p>
+      </div>
+      <div class="glass glass-hover rounded-xl p-6">
+        <i data-lucide="workflow" class="w-5 h-5 text-emerald-400 mb-3"></i>
+        <div class="font-display text-slate-100 mb-1">Workflow automation</div>
+        <p class="text-sm text-slate-500 leading-relaxed">Power Query pipelines that cut recurring manual data prep by 5+ hours a week per project.</p>
+      </div>
+      <div class="glass glass-hover rounded-xl p-6">
+        <i data-lucide="line-chart" class="w-5 h-5 text-cyan-400 mb-3"></i>
+        <div class="font-display text-slate-100 mb-1">Growth &amp; SEO analytics</div>
+        <p class="text-sm text-slate-500 leading-relaxed">Metrics-led content and community strategy that scaled organic reach into the hundreds of thousands.</p>
+      </div>
+      <div class="glass glass-hover rounded-xl p-6">
+        <i data-lucide="database" class="w-5 h-5 text-emerald-400 mb-3"></i>
+        <div class="font-display text-slate-100 mb-1">Relational modeling</div>
+        <p class="text-sm text-slate-500 leading-relaxed">SQL databases, merged relational tables, and advanced DAX across real-world training datasets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE STUDIES ============ -->
+<section id="case-studies" class="relative px-6 lg:px-10 py-20 border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10">
+      <div>
+        <h2 class="font-display text-3xl text-slate-100">Featured case studies</h2>
+        <p class="text-slate-500 mt-2 max-w-lg">Three dashboards, three different businesses to defend: a retailer's margins, a bank's liquidity, and a distributor's territory quotas.</p>
+      </div>
+      <div class="flex flex-wrap gap-2" id="filterGroup" role="tablist" aria-label="Filter case studies">
+        <button class="filter-pill active text-xs px-4 py-2 rounded-full" data-filter="all">All</button>
+        <button class="filter-pill text-xs px-4 py-2 rounded-full" data-filter="financial">Financial Analytics</button>
+        <button class="filter-pill text-xs px-4 py-2 rounded-full" data-filter="retail">Commercial Retail</button>
+        <button class="filter-pill text-xs px-4 py-2 rounded-full" data-filter="b2b">Executive B2B</button>
+      </div>
+    </div>
+
+    <div id="projectGrid" class="grid lg:grid-cols-3 gap-6 relative">
+
+      <!-- Card 1: Superstore -->
+      <article class="project-card grad-border glass glass-hover rounded-2xl overflow-hidden flex flex-col" data-category="retail">
+        <div class="img-frame relative h-44 overflow-hidden border-b border-white/5">
+          <div class="img-placeholder">
+            <i data-lucide="bar-chart-3" class="w-8 h-8 text-slate-600"></i>
+            <span>SUPERSTORE.PNG</span>
+          </div>
+          <img src="images/superstore.png" alt="Superstore Sales & Profitability Diagnostic dashboard preview" class="w-full h-full object-cover object-top opacity-90" onerror="this.classList.add('img-broken')" loading="lazy">
+          <span class="absolute top-3 left-3 z-10 text-[10px] font-mono uppercase tracking-wide bg-black/50 backdrop-blur px-2.5 py-1 rounded-full text-cyan-300 border border-cyan-400/20">Retail · Profit Leakage</span>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-display text-lg text-slate-100">Superstore Sales &amp; Profitability Diagnostic</h3>
+          <p class="text-sm text-slate-500 mt-2 leading-relaxed">Diagnosing margin leakage and negative returns on heavily discounted product lines.</p>
+          <div class="grid grid-cols-2 gap-3 mt-5 text-sm">
+            <div><div class="kpi-figure text-slate-100">$<span data-count-to="2.30" data-decimals="2">0</span>M</div><div class="text-[11px] text-slate-500">Sales</div></div>
+            <div><div class="kpi-figure text-emerald-300">$<span data-count-to="286.4" data-decimals="1">0</span>K</div><div class="text-[11px] text-slate-500">Profit</div></div>
+            <div><div class="kpi-figure text-slate-100"><span data-count-to="12.5" data-decimals="1">0</span>%</div><div class="text-[11px] text-slate-500">Margin</div></div>
+            <div><div class="kpi-figure text-slate-100"><span data-count-to="5009">0</span></div><div class="text-[11px] text-slate-500">Orders</div></div>
+          </div>
+          <button class="mt-6 btn-ghost text-xs px-4 py-2.5 rounded-lg inline-flex items-center justify-center gap-2 w-full" data-modal-open="modal-superstore">
+            Inspect Architecture &amp; Insights <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 2: Nile Bank -->
+      <article class="project-card grad-border glass glass-hover rounded-2xl overflow-hidden flex flex-col" data-category="financial">
+        <div class="img-frame relative h-44 overflow-hidden border-b border-white/5">
+          <div class="img-placeholder">
+            <i data-lucide="landmark" class="w-8 h-8 text-slate-600"></i>
+            <span>NILEBANK.PNG</span>
+          </div>
+          <img src="images/nilebank.png" alt="Nile Bank Retail Portfolio and Liquidity Analytics dashboard preview" class="w-full h-full object-cover object-top opacity-90" onerror="this.classList.add('img-broken')" loading="lazy">
+          <span class="absolute top-3 left-3 z-10 text-[10px] font-mono uppercase tracking-wide bg-black/50 backdrop-blur px-2.5 py-1 rounded-full text-emerald-300 border border-emerald-400/20">Banking · Liquidity</span>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-display text-lg text-slate-100">Nile Bank: Retail Portfolio &amp; Liquidity Analytics</h3>
+          <p class="text-sm text-slate-500 mt-2 leading-relaxed">Centralized executive view of branch cash positions, liquidity trends, and high-value customers.</p>
+          <div class="grid grid-cols-2 gap-3 mt-5 text-sm">
+            <div><div class="kpi-figure text-slate-100">EGP <span data-count-to="3.65" data-decimals="2">0</span>B</div><div class="text-[11px] text-slate-500">Balances</div></div>
+            <div><div class="kpi-figure text-emerald-300">EGP <span data-count-to="1.28" data-decimals="2">0</span>M</div><div class="text-[11px] text-slate-500">Avg Balance</div></div>
+            <div><div class="kpi-figure text-slate-100">EGP <span data-count-to="403.6" data-decimals="1">0</span>M</div><div class="text-[11px] text-slate-500">Txn Volume</div></div>
+            <div><div class="kpi-figure text-emerald-300">+EGP <span data-count-to="61.3" data-decimals="1">0</span>M</div><div class="text-[11px] text-slate-500">Net Flow</div></div>
+          </div>
+          <button class="mt-6 btn-ghost text-xs px-4 py-2.5 rounded-lg inline-flex items-center justify-center gap-2 w-full" data-modal-open="modal-nilebank">
+            Inspect Architecture &amp; Insights <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 3: B2B -->
+      <article class="project-card grad-border glass glass-hover rounded-2xl overflow-hidden flex flex-col" data-category="b2b">
+        <div class="img-frame relative h-44 overflow-hidden border-b border-white/5">
+          <div class="img-placeholder">
+            <i data-lucide="globe" class="w-8 h-8 text-slate-600"></i>
+            <span>B2B.PNG</span>
+          </div>
+          <img src="images/b2b.png" alt="Global B2B Sales and Territory Performance Analytics dashboard preview" class="w-full h-full object-cover object-top opacity-90" onerror="this.classList.add('img-broken')" loading="lazy">
+          <span class="absolute top-3 left-3 z-10 text-[10px] font-mono uppercase tracking-wide bg-black/50 backdrop-blur px-2.5 py-1 rounded-full text-cyan-300 border border-cyan-400/20">B2B · Quota Tracking</span>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-display text-lg text-slate-100">Global B2B Sales &amp; Territory Performance Analytics</h3>
+          <p class="text-sm text-slate-500 mt-2 leading-relaxed">AdventureWorks global distribution evaluation across North America and Europe.</p>
+          <div class="grid grid-cols-2 gap-3 mt-5 text-sm">
+            <div><div class="kpi-figure text-slate-100">$<span data-count-to="30.09" data-decimals="2">0</span>M</div><div class="text-[11px] text-slate-500">Net Revenue</div></div>
+            <div><div class="kpi-figure text-emerald-300"><span data-count-to="1465">0</span></div><div class="text-[11px] text-slate-500">B2B Orders</div></div>
+            <div><div class="kpi-figure text-slate-100"><span data-count-to="85866">0</span></div><div class="text-[11px] text-slate-500">Units Sold</div></div>
+            <div><div class="kpi-figure text-slate-100"><span data-count-to="17">0</span></div><div class="text-[11px] text-slate-500">Active Reps</div></div>
+          </div>
+          <button class="mt-6 btn-ghost text-xs px-4 py-2.5 rounded-lg inline-flex items-center justify-center gap-2 w-full" data-modal-open="modal-b2b">
+            Inspect Architecture &amp; Insights <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMPACT CALCULATOR ============ -->
+<section id="calculator" class="relative px-6 lg:px-10 py-20 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grad-border glass rounded-[1.5rem] p-8 lg:p-12 grid lg:grid-cols-2 gap-12">
+    <div>
+      <span class="text-xs font-mono text-cyan-300 tracking-wide">ROI ESTIMATOR</span>
+      <h2 class="font-display text-3xl text-slate-100 mt-3">What manual reporting is actually costing you</h2>
+      <p class="text-slate-500 mt-4 leading-relaxed max-w-md">Based on the 35% efficiency lift and 5+ hours saved weekly seen on live automation work. Adjust the sliders for your team.</p>
+
+      <div class="mt-9 space-y-8">
+        <div>
+          <div class="flex justify-between text-sm mb-3">
+            <label for="hoursSlider" class="text-slate-300">Manual reporting hours / week, per person</label>
+            <span class="font-mono text-cyan-300" id="hoursVal">10</span>
+          </div>
+          <input type="range" id="hoursSlider" min="2" max="30" value="10" step="1" class="w-full">
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-3">
+            <label for="teamSlider" class="text-slate-300">Team size handling reporting</label>
+            <span class="font-mono text-cyan-300" id="teamVal">5</span>
+          </div>
+          <input type="range" id="teamSlider" min="1" max="30" value="5" step="1" class="w-full">
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-3">
+            <label for="rateSlider" class="text-slate-300">Blended hourly cost (USD)</label>
+            <span class="font-mono text-cyan-300" id="rateVal">$25</span>
+          </div>
+          <input type="range" id="rateSlider" min="10" max="120" value="25" step="5" class="w-full">
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col justify-center">
+      <div class="grid grid-cols-2 gap-5">
+        <div class="glass rounded-xl p-6 text-center">
+          <i data-lucide="clock" class="w-5 h-5 text-cyan-400 mx-auto mb-2"></i>
+          <div class="font-display text-2xl sm:text-3xl text-slate-100 kpi-figure" id="hoursSavedOut">0</div>
+          <div class="text-xs text-slate-500 mt-1">hours saved / week</div>
+        </div>
+        <div class="glass rounded-xl p-6 text-center">
+          <i data-lucide="calendar-clock" class="w-5 h-5 text-emerald-400 mx-auto mb-2"></i>
+          <div class="font-display text-2xl sm:text-3xl text-slate-100 kpi-figure" id="hoursYearOut">0</div>
+          <div class="text-xs text-slate-500 mt-1">hours saved / year</div>
+        </div>
+        <div class="glass rounded-xl p-6 text-center col-span-2">
+          <i data-lucide="badge-dollar-sign" class="w-5 h-5 text-emerald-400 mx-auto mb-2"></i>
+          <div class="font-display text-3xl sm:text-4xl text-gradient kpi-figure">$<span id="costSavedOut">0</span></div>
+          <div class="text-xs text-slate-500 mt-1">estimated annual savings from automated BI workflows</div>
+        </div>
+      </div>
+      <p class="text-[11px] text-slate-600 mt-5 leading-relaxed">Illustrative estimate for conversation purposes, based on a 35% average efficiency gain from automating manual reporting — not a guaranteed outcome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECH STACK ============ -->
+<section id="tech-stack" class="relative px-6 lg:px-10 py-20 border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="font-display text-3xl text-slate-100">Technical arsenal</h2>
+    <p class="text-slate-500 mt-2 max-w-lg">Hover any tool to see how it actually shows up in the workflow.</p>
+
+    <div class="mt-10 space-y-9">
+      <div>
+        <div class="text-xs font-mono text-cyan-300 tracking-wide mb-4">BI &amp; ANALYTICS</div>
+        <div class="flex flex-wrap gap-3" id="techGroupBI"></div>
+      </div>
+      <div>
+        <div class="text-xs font-mono text-emerald-300 tracking-wide mb-4">DATA SYSTEMS &amp; FOUNDATIONS</div>
+        <div class="flex flex-wrap gap-3" id="techGroupSystems"></div>
+      </div>
+      <div>
+        <div class="text-xs font-mono text-slate-400 tracking-wide mb-4">BUSINESS ACUMEN</div>
+        <div class="flex flex-wrap gap-3" id="techGroupBiz"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDENTIALS ============ -->
+<section id="credentials" class="relative px-6 lg:px-10 py-20 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-14">
+    <div>
+      <h2 class="font-display text-3xl text-slate-100">Track record &amp; credentials</h2>
+      <p class="text-slate-500 mt-4 leading-relaxed max-w-sm">Commerce degree, then a deliberate re-tooling into data — scholar programs, applied certifications, and hands-on roles stacked from 2018 through today.</p>
+      <button id="openResumeModal" class="btn-primary mt-7 px-5 py-3 rounded-lg text-sm inline-flex items-center gap-2">
+        <i data-lucide="file-text" class="w-4 h-4"></i> Preview Resume
+      </button>
+    </div>
+
+    <div class="relative pl-8" id="timelineList">
+      <div class="absolute left-[7px] top-1 bottom-1 w-px timeline-line"></div>
+      <!-- items injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="relative px-6 lg:px-10 py-20 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-[1fr_0.8fr] gap-10">
+
+    <div class="grad-border glass rounded-2xl p-8">
+      <h2 class="font-display text-2xl text-slate-100 mb-1">Start a conversation</h2>
+      <p class="text-slate-500 text-sm mb-7">Full-time roles, freelance dashboards, or a quick technical question — all welcome.</p>
+
+      <form id="contactForm" novalidate class="space-y-5">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="fullName" class="text-xs text-slate-400 mb-1.5 block">Full name</label>
+            <input id="fullName" name="fullName" type="text" placeholder="Jane Cooper" class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm placeholder:text-slate-600 focus:border-cyan-400/50 transition-colors">
+            <p class="error-msg text-[11px] text-rose-400 mt-1 hidden">Enter your name.</p>
+          </div>
+          <div>
+            <label for="workEmail" class="text-xs text-slate-400 mb-1.5 block">Work email</label>
+            <input id="workEmail" name="workEmail" type="email" placeholder="jane@company.com" class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm placeholder:text-slate-600 focus:border-cyan-400/50 transition-colors">
+            <p class="error-msg text-[11px] text-rose-400 mt-1 hidden">Enter a valid email.</p>
+          </div>
+        </div>
+
+        <div>
+          <label for="inquiryType" class="text-xs text-slate-400 mb-1.5 block">Inquiry type</label>
+          <select id="inquiryType" name="inquiryType" class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm text-slate-300 focus:border-cyan-400/50 transition-colors">
+            <option value="" class="bg-[#0F172A]">Select one</option>
+            <option value="Full-time Hiring" class="bg-[#0F172A]">Full-time Hiring</option>
+            <option value="Freelance BI Project" class="bg-[#0F172A]">Freelance BI Project</option>
+            <option value="Consulting" class="bg-[#0F172A]">Consulting</option>
+            <option value="Quick Chat" class="bg-[#0F172A]">Quick Chat</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="text-xs text-slate-400 mb-1.5 block">Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Tell me a bit about what you're working on..." class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm placeholder:text-slate-600 focus:border-cyan-400/50 transition-colors resize-none"></textarea>
+          <p class="error-msg text-[11px] text-rose-400 mt-1 hidden">Add a short message.</p>
+        </div>
+
+        <!-- To wire this up for real: point the fetch() in the script below at your
+             Formspree or Web3Forms endpoint and pass the FormData through. -->
+        <button type="submit" id="submitBtn" class="btn-primary w-full py-3.5 rounded-lg text-sm inline-flex items-center justify-center gap-2">
+          <span id="submitLabel">Send message</span>
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+
+        <div id="formSuccess" class="hidden items-center gap-2 text-sm text-emerald-300 bg-emerald-400/5 border border-emerald-400/20 rounded-lg px-4 py-3">
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i> Message sent — I'll reply within a day.
+        </div>
+      </form>
+    </div>
+
+    <div class="space-y-6">
+      <div class="glass rounded-2xl p-7">
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span class="text-emerald-300">Available for opportunities</span>
+        </div>
+        <p class="text-sm text-slate-400 mt-3">Based in Beni Suef, Egypt (GMT+2)</p>
+
+        <div class="mt-6 space-y-3">
+          <button class="copy-btn w-full flex items-center justify-between bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm hover:border-cyan-400/40 transition-colors" data-copy="abo.yazid913@gmail.com">
+            <span class="flex items-center gap-2 text-slate-300"><i data-lucide="mail" class="w-4 h-4 text-cyan-400"></i> abo.yazid913@gmail.com</span>
+            <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-500"></i>
+          </button>
+          <button class="copy-btn w-full flex items-center justify-between bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm hover:border-cyan-400/40 transition-colors" data-copy="+201096454543">
+            <span class="flex items-center gap-2 text-slate-300"><i data-lucide="phone" class="w-4 h-4 text-emerald-400"></i> +20 109 645 4543</span>
+            <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-500"></i>
+          </button>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+          <a href="https://linkedin.com/in/ragab-samir" target="_blank" rel="noopener" class="flex-1 btn-ghost rounded-lg py-2.5 text-xs flex items-center justify-center gap-2"><i data-lucide="linkedin" class="w-3.5 h-3.5"></i> LinkedIn</a>
+          <a href="https://github.com/Ragab-Samir" target="_blank" rel="noopener" class="flex-1 btn-ghost rounded-lg py-2.5 text-xs flex items-center justify-center gap-2"><i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub</a>
+        </div>
+      </div>
+
+      <div class="glass rounded-2xl p-7">
+        <div class="text-xs font-mono text-slate-500 mb-3">CURRENT FOCUS</div>
+        <p class="text-sm text-slate-400 leading-relaxed">Junior Data Analyst Trainee at the Digital Egypt Pioneers Initiative — shipping end-to-end BI projects across real-world retail and banking datasets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="relative px-6 lg:px-10 py-10 border-t border-white/5">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+    <div class="flex items-center gap-2">
+      <span class="w-6 h-6 rounded-md bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-[#04121A] text-[10px] font-bold">RS</span>
+      © <span id="year"></span> Ragab Samir. Built with Power BI, DAX, and a commerce degree.
+    </div>
+    <div class="flex gap-6 text-xs">
+      <a href="#about" class="hover:text-slate-300 transition-colors">About</a>
+      <a href="#case-studies" class="hover:text-slate-300 transition-colors">Case Studies</a>
+      <a href="#contact" class="hover:text-slate-300 transition-colors">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ TOAST ============ -->
+<div id="toast" class="fixed bottom-6 right-6 z-[70] glass rounded-lg px-4 py-3 text-sm flex items-center gap-2 text-slate-200">
+  <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+  <span id="toastMsg">Copied to clipboard!</span>
+</div>
+
+<!-- ============ PROJECT MODALS ============ -->
+
+<!-- Modal 1: Superstore -->
+<div class="modal-overlay modal-hidden fixed inset-0 z-[80] flex items-center justify-center p-4" id="modal-superstore">
+  <div class="modal-backdrop absolute inset-0" data-modal-close></div>
+  <div class="modal-panel relative w-full max-w-3xl max-h-[85vh] overflow-y-auto glass grad-border rounded-2xl p-6 sm:p-8">
+    <button class="absolute top-5 right-5 w-9 h-9 rounded-lg glass flex items-center justify-center" data-modal-close aria-label="Close">
+      <i data-lucide="x" class="w-4 h-4"></i>
+    </button>
+    <span class="text-[10px] font-mono uppercase tracking-wide text-cyan-300 border border-cyan-400/20 bg-cyan-400/5 rounded-full px-2.5 py-1">Retail · Profit Leakage Diagnostic</span>
+    <h3 class="font-display text-2xl text-slate-100 mt-4">Superstore Sales &amp; Profitability Diagnostic</h3>
+
+    <div class="img-frame rounded-xl border border-white/10 mt-5 h-64 sm:h-80 overflow-hidden">
+      <div class="img-placeholder">
+        <i data-lucide="bar-chart-3" class="w-10 h-10 text-slate-600"></i>
+        <span>images/superstore.png</span>
+      </div>
+      <img src="images/superstore.png" alt="Superstore dashboard full view" class="w-full h-full object-cover object-top" onerror="this.classList.add('img-broken')" loading="lazy">
+    </div>
+
+    <div class="flex gap-6 mt-7 border-b border-white/10 text-sm" role="tablist">
+      <button class="tab-btn active py-2" data-tab-target="t1-questions">Business Questions</button>
+      <button class="tab-btn py-2" data-tab-target="t1-dax">DAX &amp; Power Query</button>
+      <button class="tab-btn py-2" data-tab-target="t1-metrics">Full Metrics</button>
+    </div>
+
+    <div class="pt-6">
+      <div class="tab-panel" id="t1-questions">
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li class="flex gap-2"><i data-lucide="circle-help" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i> Which sub-categories are profitable on paper but losing money once discounting is factored in?</li>
+          <li class="flex gap-2"><i data-lucide="circle-help" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i> At what discount threshold does margin turn negative, and does that threshold vary by category?</li>
+          <li class="flex gap-2"><i data-lucide="circle-help" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i> Which customers and regions are driving the bulk of profit, versus just the bulk of sales volume?</li>
+        </ul>
+      </div>
+      <div class="tab-panel hidden" id="t1-dax">
+        <ul class="space-y-3 text-sm">
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Profit Margin % = DIVIDE([Total Profit], [Total Sales], 0)</li>
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Discounted Orders = CALCULATE(COUNTROWS(Orders), Orders[Discount] &gt; 0)</li>
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Power Query: standardized date formats, removed duplicate order lines, and split the Customer table out of the flat CSV extract.</li>
+        </ul>
+      </div>
+      <div class="tab-panel hidden grid grid-cols-2 sm:grid-cols-4 gap-4" id="t1-metrics">
+        <div><div class="kpi-figure text-slate-100 text-lg">$2.30M</div><div class="text-[11px] text-slate-500">Sales</div></div>
+        <div><div class="kpi-figure text-emerald-300 text-lg">$286.4K</div><div class="text-[11px] text-slate-500">Profit</div></div>
+        <div><div class="kpi-figure text-slate-100 text-lg">12.5%</div><div class="text-[11px] text-slate-500">Margin</div></div>
+        <div><div class="kpi-figure text-slate-100 text-lg">5,009</div><div class="text-[11px] text-slate-500">Orders</div></div>
+        <div class="col-span-2 sm:col-span-4 text-xs text-slate-500 mt-1">793 unique customers analyzed across the West, Central, Corporate, and East regions.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2: Nile Bank -->
+<div class="modal-overlay modal-hidden fixed inset-0 z-[80] flex items-center justify-center p-4" id="modal-nilebank">
+  <div class="modal-backdrop absolute inset-0" data-modal-close></div>
+  <div class="modal-panel relative w-full max-w-3xl max-h-[85vh] overflow-y-auto glass grad-border rounded-2xl p-6 sm:p-8">
+    <button class="absolute top-5 right-5 w-9 h-9 rounded-lg glass flex items-center justify-center" data-modal-close aria-label="Close">
+      <i data-lucide="x" class="w-4 h-4"></i>
+    </button>
+    <span class="text-[10px] font-mono uppercase tracking-wide text-emerald-300 border border-emerald-400/20 bg-emerald-400/5 rounded-full px-2.5 py-1">Banking · Liquidity Management</span>
+    <h3 class="font-display text-2xl text-slate-100 mt-4">Nile Bank: Retail Portfolio &amp; Liquidity Analytics</h3>
+
+    <div class="img-frame rounded-xl border border-white/10 mt-5 h-64 sm:h-80 overflow-hidden">
+      <div class="img-placeholder">
+        <i data-lucide="landmark" class="w-10 h-10 text-slate-600"></i>
+        <span>images/nilebank.png</span>
+      </div>
+      <img src="images/nilebank.png" alt="Nile Bank dashboard full view" class="w-full h-full object-cover object-top" onerror="this.classList.add('img-broken')" loading="lazy">
+    </div>
+
+    <div class="flex gap-6 mt-7 border-b border-white/10 text-sm" role="tablist">
+      <button class="tab-btn active py-2" data-tab-target="t2-questions">Business Questions</button>
+      <button class="tab-btn py-2" data-tab-target="t2-dax">DAX &amp; Power Query</button>
+      <button class="tab-btn py-2" data-tab-target="t2-metrics">Full Metrics</button>
+    </div>
+
+    <div class="pt-6">
+      <div class="tab-panel" id="t2-questions">
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li class="flex gap-2"><i data-lucide="circle-help" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Which branches are net depositing versus net withdrawing this year, and is that shifting month over month?</li>
+          <li class="flex gap-2"><i data-lucide="circle-help" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> How concentrated is the deposit base — what share sits with the top 10 branches and top customers?</li>
+          <li class="flex gap-2"><i data-lucide="circle-help" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> How does account-type mix (current, savings, fixed deposit, youth, business) differ by region?</li>
+        </ul>
+      </div>
+      <div class="tab-panel hidden" id="t2-dax">
+        <ul class="space-y-3 text-sm">
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Net Cash Flow = [Total Deposits] - [Total Withdrawals]</li>
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Avg Balance per Customer = DIVIDE([Total Customer Balances], DISTINCTCOUNT(Customers[CustomerID]))</li>
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Deposit / Withdrawal Ratio = DIVIDE([Total Deposits], [Total Withdrawals])</li>
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Power Query: consolidated separate customer, branch, and transaction extracts into one relational model joined on a shared branch key.</li>
+        </ul>
+      </div>
+      <div class="tab-panel hidden grid grid-cols-2 sm:grid-cols-4 gap-4" id="t2-metrics">
+        <div><div class="kpi-figure text-slate-100 text-lg">EGP 3.65B</div><div class="text-[11px] text-slate-500">Balances</div></div>
+        <div><div class="kpi-figure text-emerald-300 text-lg">EGP 1.28M</div><div class="text-[11px] text-slate-500">Avg Balance</div></div>
+        <div><div class="kpi-figure text-slate-100 text-lg">EGP 403.6M</div><div class="text-[11px] text-slate-500">Txn Volume</div></div>
+        <div><div class="kpi-figure text-emerald-300 text-lg">+EGP 61.3M</div><div class="text-[11px] text-slate-500">Net Flow</div></div>
+        <div class="col-span-2 sm:col-span-4 text-xs text-slate-500 mt-1">2,855 active customers across Greater Cairo, Delta &amp; North Coast, Upper Egypt, and the Suez Canal region.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3: B2B -->
+<div class="modal-overlay modal-hidden fixed inset-0 z-[80] flex items-center justify-center p-4" id="modal-b2b">
+  <div class="modal-backdrop absolute inset-0" data-modal-close></div>
+  <div class="modal-panel relative w-full max-w-3xl max-h-[85vh] overflow-y-auto glass grad-border rounded-2xl p-6 sm:p-8">
+    <button class="absolute top-5 right-5 w-9 h-9 rounded-lg glass flex items-center justify-center" data-modal-close aria-label="Close">
+      <i data-lucide="x" class="w-4 h-4"></i>
+    </button>
+    <span class="text-[10px] font-mono uppercase tracking-wide text-cyan-300 border border-cyan-400/20 bg-cyan-400/5 rounded-full px-2.5 py-1">B2B Distribution · Quota Tracking</span>
+    <h3 class="font-display text-2xl text-slate-100 mt-4">Global B2B Sales &amp; Territory Performance Analytics</h3>
+
+    <div class="img-frame rounded-xl border border-white/10 mt-5 h-64 sm:h-80 overflow-hidden">
+      <div class="img-placeholder">
+        <i data-lucide="globe" class="w-10 h-10 text-slate-600"></i>
+        <span>images/b2b.png</span>
+      </div>
+      <img src="images/b2b.png" alt="B2B sales dashboard full view" class="w-full h-full object-cover object-top" onerror="this.classList.add('img-broken')" loading="lazy">
+    </div>
+
+    <div class="flex gap-6 mt-7 border-b border-white/10 text-sm" role="tablist">
+      <button class="tab-btn active py-2" data-tab-target="t3-questions">Business Questions</button>
+      <button class="tab-btn py-2" data-tab-target="t3-dax">DAX &amp; Power Query</button>
+      <button class="tab-btn py-2" data-tab-target="t3-metrics">Full Metrics</button>
+    </div>
+
+    <div class="pt-6">
+      <div class="tab-panel" id="t3-questions">
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li class="flex gap-2"><i data-lucide="circle-help" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i> How dependent is total revenue on the Bikes category, and what's the exposure if that softens?</li>
+          <li class="flex gap-2"><i data-lucide="circle-help" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i> Which territories are growing year-over-year versus flat, and how does that map to rep coverage?</li>
+          <li class="flex gap-2"><i data-lucide="circle-help" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i> Is revenue concentration among the top 2 reps (48%) a coverage risk worth flagging to sales leadership?</li>
+        </ul>
+      </div>
+      <div class="tab-panel hidden" id="t3-dax">
+        <ul class="space-y-3 text-sm">
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">YoY Growth % = DIVIDE([Revenue CY] - [Revenue PY], [Revenue PY])</li>
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Rep Revenue Share = DIVIDE([Revenue by Rep], CALCULATE([Total Revenue], ALL(SalesReps)))</li>
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Quota Attainment % = DIVIDE([Actual Revenue], [Quota Target])</li>
+          <li class="glass rounded-lg p-3 font-mono text-xs text-emerald-300 leading-relaxed">Power Query: unpivoted quarterly territory extracts, deduplicated rep IDs, and mapped inconsistent country labels to a shared geography table feeding a star schema.</li>
+        </ul>
+      </div>
+      <div class="tab-panel hidden grid grid-cols-2 sm:grid-cols-4 gap-4" id="t3-metrics">
+        <div><div class="kpi-figure text-slate-100 text-lg">$30.09M</div><div class="text-[11px] text-slate-500">Net Revenue</div></div>
+        <div><div class="kpi-figure text-emerald-300 text-lg">1,465</div><div class="text-[11px] text-slate-500">B2B Orders</div></div>
+        <div><div class="kpi-figure text-slate-100 text-lg">85,866</div><div class="text-[11px] text-slate-500">Units Sold</div></div>
+        <div><div class="kpi-figure text-slate-100 text-lg">17</div><div class="text-[11px] text-slate-500">Active Reps</div></div>
+        <div class="col-span-2 sm:col-span-4 text-xs text-slate-500 mt-1">Bikes drove 80.5% of category revenue; Canada led all territories at $10.59M, followed by the Northwest at $6.15M.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RESUME MODAL ============ -->
+<div class="modal-overlay modal-hidden fixed inset-0 z-[80] flex items-center justify-center p-4" id="modal-resume">
+  <div class="modal-backdrop absolute inset-0" data-modal-close></div>
+  <div class="modal-panel relative w-full max-w-2xl max-h-[85vh] overflow-y-auto glass grad-border rounded-2xl p-6 sm:p-8">
+    <button class="absolute top-5 right-5 w-9 h-9 rounded-lg glass flex items-center justify-center" data-modal-close aria-label="Close">
+      <i data-lucide="x" class="w-4 h-4"></i>
+    </button>
+    <h3 class="font-display text-2xl text-slate-100">Resume highlights</h3>
+    <p class="text-sm text-slate-500 mt-1">Ragab Samir — Junior Data Analyst · Beni Suef, Egypt</p>
+
+    <div class="mt-6 space-y-5 text-sm text-slate-400">
+      <div>
+        <div class="text-xs font-mono text-cyan-300 mb-2">CURRENT ROLE</div>
+        <p><span class="text-slate-200">Junior Data Analyst (Trainee), DEPI</span> — 10+ end-to-end BI projects on real-world datasets, improving data accuracy by 40% and stakeholder decision speed by 25%.</p>
+      </div>
+      <div>
+        <div class="text-xs font-mono text-emerald-300 mb-2">PRIOR EXPERIENCE</div>
+        <p>7+ years across freelance SEO &amp; content management, digital &amp; social media strategy, and accounting/showroom management — each role built around metrics, reporting, and operational accuracy.</p>
+      </div>
+      <div>
+        <div class="text-xs font-mono text-slate-400 mb-2">EDUCATION</div>
+        <p>Bachelor of Commerce, Beni Suef University · DEPI Data Analysis Track Scholar · Google Data Analytics Professional Certificate.</p>
+      </div>
+    </div>
+
+    <a id="downloadResumeBtn" href="Ragab_Samir_CV.pdf" download="Ragab_Samir_CV.pdf" class="btn-primary mt-7 w-full py-3.5 rounded-lg text-sm inline-flex items-center justify-center gap-2">
+      <i data-lucide="download" class="w-4 h-4"></i> Download full resume (PDF)
+    </a>
+  </div>
+</div>
+
+<script>
+lucide.createIcons();
+
+/* ---------- YEAR ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------- NAVBAR SCROLL STATE ---------- */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* ---------- MOBILE MENU ---------- */
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+menuToggle.addEventListener('click', () => {
+  const isHidden = mobileMenu.classList.toggle('hidden');
+  menuToggle.setAttribute('aria-expanded', String(!isHidden));
+  menuToggle.innerHTML = isHidden ? '<i data-lucide="menu" class="w-5 h-5"></i>' : '<i data-lucide="x" class="w-5 h-5"></i>';
+  lucide.createIcons();
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mobileMenu.classList.add('hidden');
+  menuToggle.innerHTML = '<i data-lucide="menu" class="w-5 h-5"></i>';
+  lucide.createIcons();
+}));
+
+/* ---------- KPI COUNTERS ---------- */
+function animateCount(el) {
+  const to = parseFloat(el.dataset.countTo);
+  const decimals = parseInt(el.dataset.decimals || '0', 10);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1400;
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const val = to * eased;
+    el.textContent = val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCount(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('[data-count-to]').forEach(el => counterObserver.observe(el));
+
+/* ---------- CASE STUDY FILTER ---------- */
+const filterButtons = document.querySelectorAll('.filter-pill');
+const projectCards = document.querySelectorAll('.project-card');
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    projectCards.forEach(card => {
+      const match = filter === 'all' || card.dataset.category === filter;
+      card.classList.toggle('hidden-card', !match);
+    });
+  });
+});
+
+/* ---------- MODALS ---------- */
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.remove('modal-hidden');
+  modal.classList.add('modal-visible');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(modal) {
+  if (!modal) return;
+  modal.classList.remove('modal-visible');
+  modal.classList.add('modal-hidden');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('[data-modal-open]').forEach(btn => {
+  btn.addEventListener('click', () => openModal(btn.dataset.modalOpen));
+});
+document.querySelectorAll('[data-modal-close]').forEach(el => {
+  el.addEventListener('click', (e) => closeModal(e.target.closest('.modal-overlay')));
+});
+document.getElementById('openResumeModal').addEventListener('click', () => openModal('modal-resume'));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.modal-visible').forEach(closeModal);
+  }
+});
+
+/* ---------- MODAL TABS ---------- */
+document.querySelectorAll('.modal-panel').forEach(panel => {
+  const tabs = panel.querySelectorAll('.tab-btn');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const targetId = tab.dataset.tabTarget;
+      panel.querySelectorAll('.tab-panel').forEach(tp => {
+        tp.classList.toggle('hidden', tp.id !== targetId);
+      });
+    });
+  });
+});
+
+/* ---------- TECH STACK PILLS ---------- */
+const techData = {
+  techGroupBI: [
+    ['Power BI', 'Model layer, DAX measures, and report design end to end.'],
+    ['Power Query', 'Data cleaning, date-format fixes, and merging relational extracts.'],
+    ['DAX', 'Time intelligence, iterator functions, and dynamic margin calculations.'],
+    ['Looker', 'Exploring LookML-defined models for cross-team reporting.'],
+    ['Excel', 'Advanced modeling, pivot analysis, and rapid stakeholder mockups.'],
+  ],
+  techGroupSystems: [
+    ['SQL Databases', 'Writing and reading relational queries behind the data model.'],
+    ['Python', 'Scripting data checks and repetitive cleaning tasks.'],
+    ['Star Schema Modeling', 'Structuring facts and dimensions for fast, reliable DAX.'],
+    ['Agile Methodologies', 'Iterating dashboards in short cycles with stakeholder feedback.'],
+  ],
+  techGroupBiz: [
+    ['Financial Diagnostics', 'Reading margin, discount, and liquidity data like a set of books.'],
+    ['Margin Optimization', 'Flagging where discounting quietly erodes profit.'],
+    ['Growth &amp; SEO Analytics', 'Metrics-led content and traffic strategy from 7 years freelancing.'],
+  ],
+};
+Object.entries(techData).forEach(([groupId, items]) => {
+  const container = document.getElementById(groupId);
+  items.forEach(([name, tip]) => {
+    const pill = document.createElement('div');
+    pill.className = 'tech-pill rounded-full px-4 py-2 text-sm text-slate-300 cursor-default';
+    pill.innerHTML = `${name}<div class="tech-tooltip glass rounded-lg p-3 text-xs text-slate-400 leading-relaxed text-left">${tip}</div>`;
+    container.appendChild(pill);
+  });
+});
+
+/* ---------- CREDENTIALS TIMELINE ---------- */
+const timelineItems = [
+  ['07/2026 – Present', 'Junior Data Analyst (Trainee)', 'Digital Egypt Pioneers Initiative (DEPI) — 10+ end-to-end BI projects on real datasets, improving data accuracy by 40% and decision speed by 25%.'],
+  ['02/2019 – 07/2022', 'Accountant &amp; Showroom Manager (Housewares)', 'Commercial Showroom — daily financial reporting at 100% precision, plus inventory audits that cut stock discrepancies by 15%.'],
+  ['02/2020 – 08/2023', 'Digital Marketing &amp; Social Media Specialist', 'Freelance / Independent — grew engagement 50% while moderating a community of over 1 million members.'],
+  ['03/2017 – 10/2024', 'Freelance Website Manager, Content Writer &amp; SEO Specialist', 'Freelance — scaled a Blogger site to 150,000 monthly visitors through SEO and Agile content workflows.'],
+  ['08/2026 – Present', 'Google Data Analytics Professional Certificate', 'Google (Coursera)'],
+  ['08/2026', 'AI for You: Training and Assessment', 'Oracle'],
+  ['08/2026', 'Data Fundamentals', 'IBM SkillsBuild'],
+  ['07/2026', 'AI Ambassadors Program (Advanced Level)', 'NTI &amp; ESE'],
+  ['05/2026 – Present', 'Data Analysis Track Scholar', 'Digital Egypt Pioneers Initiative (DEPI)'],
+  ['03/2018', 'Bachelor of Commerce', 'Beni Suef University'],
+];
+const timelineList = document.getElementById('timelineList');
+timelineItems.forEach(([date, title, org]) => {
+  const item = document.createElement('div');
+  item.className = 'relative pb-8 last:pb-0';
+  item.innerHTML = `
+    <div class="timeline-dot absolute -left-8 top-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-400"></div>
+    <div class="text-xs font-mono text-slate-500">${date}</div>
+    <div class="text-slate-100 font-medium mt-1">${title}</div>
+    <div class="text-sm text-slate-500 leading-relaxed">${org}</div>
+  `;
+  timelineList.appendChild(item);
+});
+
+/* ---------- ROI CALCULATOR ---------- */
+const hoursSlider = document.getElementById('hoursSlider');
+const teamSlider = document.getElementById('teamSlider');
+const rateSlider = document.getElementById('rateSlider');
+const hoursVal = document.getElementById('hoursVal');
+const teamVal = document.getElementById('teamVal');
+const rateVal = document.getElementById('rateVal');
+const hoursSavedOut = document.getElementById('hoursSavedOut');
+const hoursYearOut = document.getElementById('hoursYearOut');
+const costSavedOut = document.getElementById('costSavedOut');
+const EFFICIENCY_GAIN = 0.35;
+
+function updateCalculator() {
+  const hours = parseFloat(hoursSlider.value);
+  const team = parseFloat(teamSlider.value);
+  const rate = parseFloat(rateSlider.value);
+
+  hoursVal.textContent = hours;
+  teamVal.textContent = team;
+  rateVal.textContent = '$' + rate;
+
+  const weeklyHoursSaved = hours * EFFICIENCY_GAIN * team;
+  const annualHoursSaved = weeklyHoursSaved * 52;
+  const annualCostSaved = annualHoursSaved * rate;
+
+  hoursSavedOut.textContent = weeklyHoursSaved.toLocaleString('en-US', { maximumFractionDigits: 1 });
+  hoursYearOut.textContent = Math.round(annualHoursSaved).toLocaleString('en-US');
+  costSavedOut.textContent = Math.round(annualCostSaved).toLocaleString('en-US');
+}
+[hoursSlider, teamSlider, rateSlider].forEach(s => s.addEventListener('input', updateCalculator));
+updateCalculator();
+
+/* ---------- CONTACT FORM ---------- */
+const contactForm = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const submitLabel = document.getElementById('submitLabel');
+const formSuccess = document.getElementById('formSuccess');
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let valid = true;
+
+  const nameInput = document.getElementById('fullName');
+  const emailInput = document.getElementById('workEmail');
+  const messageInput = document.getElementById('message');
+
+  const setError = (input, show) => {
+    const msg = input.parentElement.querySelector('.error-msg');
+    input.classList.toggle('border-rose-500/60', show);
+    if (msg) msg.classList.toggle('hidden', !show);
+    if (show) valid = false;
+  };
+
+  setError(nameInput, nameInput.value.trim().length < 2);
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim());
+  setError(emailInput, !emailOk);
+  setError(messageInput, messageInput.value.trim().length < 5);
+
+  if (!valid) return;
+
+  submitBtn.disabled = true;
+  submitLabel.textContent = 'Sending…';
+
+  // Simulated submit — swap this block for a real fetch() call to
+  // Formspree / Web3Forms, passing new FormData(contactForm).
+  setTimeout(() => {
+    submitBtn.disabled = false;
+    submitLabel.textContent = 'Send message';
+    contactForm.reset();
+    formSuccess.classList.remove('hidden');
+    formSuccess.classList.add('flex');
+    showToast('Message sent successfully!');
+    setTimeout(() => formSuccess.classList.add('hidden'), 5000);
+  }, 900);
+});
+
+/* ---------- COPY TO CLIPBOARD ---------- */
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const value = btn.dataset.copy;
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch (err) {
+      const ta = document.createElement('textarea');
+      ta.value = value;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    showToast('Copied to clipboard!');
+  });
+});
+
+/* ---------- TOAST ---------- */
+let toastTimer;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+</script>
+</body>
+</html>
