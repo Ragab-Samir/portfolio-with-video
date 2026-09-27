@@ -158,31 +158,31 @@
   .img-frame{position:relative;background:radial-gradient(circle at 30% 20%, #16233B, #0B1220 70%);}
   .img-frame .img-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;}
   .img-frame .img-placeholder span{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--text-low);letter-spacing:.05em;}
-	  .img-frame img{position:relative;z-index:1;transition:opacity .3s ease;}
-	  .img-frame img.img-broken{opacity:0 !important;}
+    .img-frame img{position:relative;z-index:1;transition:opacity .3s ease;}
+    .img-frame img.img-broken{opacity:0 !important;}
 
-	  /* Profile portrait */
-	  .profile-photo{
-	    position:relative;
-	    isolation:isolate;
-	    box-shadow:0 24px 70px -28px rgba(34,211,238,0.55);
-	  }
-	  .profile-photo::before{
-	    content:"";
-	    position:absolute;inset:-1px;
-	    border-radius:inherit;
-	    background:linear-gradient(135deg,rgba(34,211,238,0.85),rgba(52,211,153,0.28) 55%,rgba(34,211,238,0.08));
-	    z-index:-1;
-	  }
-	  .profile-photo::after{
-	    content:"";
-	    position:absolute;inset:0;
-	    border-radius:inherit;
-	    background:linear-gradient(180deg,transparent 55%,rgba(11,15,23,0.72));
-	    pointer-events:none;
-	  }
+    /* Profile portrait */
+    .profile-photo{
+      position:relative;
+      isolation:isolate;
+      box-shadow:0 24px 70px -28px rgba(34,211,238,0.55);
+    }
+    .profile-photo::before{
+      content:"";
+      position:absolute;inset:-1px;
+      border-radius:inherit;
+      background:linear-gradient(135deg,rgba(34,211,238,0.85),rgba(52,211,153,0.28) 55%,rgba(34,211,238,0.08));
+      z-index:-1;
+    }
+    .profile-photo::after{
+      content:"";
+      position:absolute;inset:0;
+      border-radius:inherit;
+      background:linear-gradient(180deg,transparent 55%,rgba(11,15,23,0.72));
+      pointer-events:none;
+    }
 
-	  /* Tech pill tooltip */
+    /* Tech pill tooltip */
   .tech-pill{
     position:relative;
     border:1px solid var(--border-glass);
@@ -271,6 +271,79 @@
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
   }
+
+  /* Video intro player */
+  .vi-frame{
+    position:relative;
+    border-radius:1.25rem;
+    overflow:hidden;
+    background:linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+    border:1px solid var(--border-glass);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    aspect-ratio:16/9;
+    cursor:pointer;
+  }
+  .vi-frame::before{
+    content:"";
+    position:absolute;inset:0;
+    border-radius:inherit;
+    padding:1px;
+    background:linear-gradient(135deg, rgba(34,211,238,0.55), rgba(52,211,153,0.15) 40%, rgba(34,211,238,0.05) 70%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+    opacity:0.7;
+    z-index:3;
+  }
+  .vi-frame video{ width:100%; height:100%; object-fit:cover; display:block; background:var(--bg-void); }
+  .vi-controls{
+    position:absolute; inset:0; z-index:4;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    background:linear-gradient(180deg, rgba(5,8,14,0) 55%, rgba(5,8,14,0.75) 100%);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .vi-frame:hover .vi-controls,
+  .vi-frame.vi-paused .vi-controls{ opacity:1; }
+  .vi-center-btn{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:64px; height:64px; border-radius:9999px;
+    background:rgba(11,15,23,0.55); border:1px solid rgba(255,255,255,0.2);
+    backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .25s ease, transform .2s ease;
+    pointer-events:none;
+  }
+  .vi-frame:hover .vi-center-btn,
+  .vi-frame.vi-paused .vi-center-btn{ opacity:1; pointer-events:auto; }
+  .vi-center-btn svg{ width:24px; height:24px; fill:var(--text-hi); }
+  .vi-bottom-row{ display:flex; align-items:center; gap:12px; padding:14px 16px; }
+  .vi-btn{
+    width:34px; height:34px; border-radius:8px;
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; cursor:pointer;
+  }
+  .vi-btn svg{ width:16px; height:16px; fill:var(--text-hi); }
+  .vi-progress-track{
+    flex:1; height:4px; border-radius:4px;
+    background:rgba(255,255,255,0.15);
+    position:relative; cursor:pointer;
+  }
+  .vi-progress-fill{
+    position:absolute; left:0; top:0; height:100%; width:0%;
+    border-radius:4px;
+    background:linear-gradient(90deg, var(--cyan), var(--emerald));
+  }
+  .vi-time{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-mid); min-width:38px; text-align:right; }
+  .vi-badge{
+    position:absolute; top:14px; left:14px; z-index:4;
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--cyan); background:rgba(0,0,0,0.45); border:1px solid rgba(34,211,238,0.25);
+    padding:5px 10px; border-radius:9999px;
+    backdrop-filter:blur(4px);
+  }
 </style>
 </head>
 <body class="antialiased">
@@ -282,12 +355,12 @@
 <div class="glow-orb w-[380px] h-[380px] bg-cyan-300 bottom-[-100px] left-[30%]"></div>
 
 <!-- ============ NAVBAR ============ -->
-	<nav id="navbar" class="fixed top-0 inset-x-0 z-50">
-	  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
-	    <a href="#top" class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight">
-	      <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-[#04121A] text-sm font-bold">RS</span>
-	      <span class="hidden sm:inline text-slate-200">Ragab Samir <span class="text-slate-500 font-normal">|</span> Data Analyst</span>
-	    </a>
+  <nav id="navbar" class="fixed top-0 inset-x-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+      <a href="#top" class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-[#04121A] text-sm font-bold">RS</span>
+        <span class="hidden sm:inline text-slate-200">Ragab Samir <span class="text-slate-500 font-normal">|</span> Data Analyst</span>
+      </a>
 
     <div class="hidden lg:flex items-center gap-8 text-sm">
       <a href="#about" class="nav-link">About</a>
@@ -298,7 +371,10 @@
       <a href="#contact" class="nav-link">Contact</a>
     </div>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a href="Ragab_Samir_CV.pdf" download="Ragab_Samir_CV.pdf" class="btn-ghost hidden lg:inline-flex items-center gap-1.5 text-xs px-3.5 py-2 rounded-lg">
+        <i data-lucide="download" class="w-3.5 h-3.5"></i> Download CV
+      </a>
       <a href="#contact" class="hidden sm:inline-flex btn-primary text-sm px-4 py-2.5 rounded-lg">Book a Consultation</a>
       <button id="menuToggle" class="lg:hidden w-10 h-10 rounded-lg glass flex items-center justify-center" aria-label="Toggle menu" aria-expanded="false">
         <i data-lucide="menu" class="w-5 h-5"></i>
@@ -314,12 +390,52 @@
     <a href="#tech-stack" class="nav-link">Tech Stack</a>
     <a href="#credentials" class="nav-link">Certifications</a>
     <a href="#contact" class="nav-link">Contact</a>
-    <a href="#contact" class="btn-primary text-center px-4 py-2.5 rounded-lg mt-1">Book a Consultation</a>
+    <a href="Ragab_Samir_CV.pdf" download="Ragab_Samir_CV.pdf" class="btn-ghost text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg mt-1">
+      <i data-lucide="download" class="w-4 h-4"></i> Download CV
+    </a>
+    <a href="#contact" class="btn-primary text-center px-4 py-2.5 rounded-lg">Book a Consultation</a>
   </div>
 </nav>
 
+<!-- ============ VIDEO INTRODUCTION ============ -->
+<section id="top" class="relative pt-28 pb-16 lg:pt-32 lg:pb-20 px-6 lg:px-10">
+  <div class="max-w-5xl mx-auto">
+    <div class="vi-frame vi-paused" id="viFrame">
+      <span class="vi-badge">00:08</span>
+      <video id="viVideo" src="videos/intro.mp4" poster="images/intro-poster.jpg" muted autoplay loop playsinline preload="metadata"></video>
+
+      <div class="vi-controls">
+        <div class="vi-center-btn" id="viCenterBtn">
+          <svg id="viCenterIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="vi-bottom-row">
+          <button class="vi-btn" id="viPlayBtn" aria-label="Play or pause">
+            <svg id="viPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="vi-progress-track" id="viProgressTrack">
+            <div class="vi-progress-fill" id="viProgressFill"></div>
+          </div>
+          <span class="vi-time" id="viTime">0:00</span>
+          <button class="vi-btn" id="viMuteBtn" aria-label="Mute or unmute">
+            <svg id="viMuteIconOn" viewBox="0 0 24 24" style="display:none;"><path d="M3 10v4h4l5 5V5L7 10H3zm13.5 2A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12z"/></svg>
+            <svg id="viMuteIconOff" viewBox="0 0 24 24"><path d="M3 10v4h4l5 5V5L7 10H3zm13.59 2 2.7-2.71-1.41-1.41L15.17 10l-2.7-2.71-1.42 1.42L13.76 11l-2.71 2.71 1.42 1.42L15.17 12l2.71 2.71 1.41-1.42L16.59 12z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-8">
+      <a href="#hero-content" class="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-cyan-300 transition-colors">
+        Scroll to explore
+        <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+
 <!-- ============ HERO ============ -->
-<header id="top" class="relative pt-40 pb-24 lg:pt-48 lg:pb-32 px-6 lg:px-10">
+<header id="hero-content" class="relative pt-20 pb-24 lg:pt-24 lg:pb-32 px-6 lg:px-10 border-t border-white/5">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.15fr_0.85fr] gap-14 items-center">
     <div class="fade-up">
       <div class="inline-flex items-center gap-2 text-xs font-mono text-emerald-300 border border-emerald-400/25 bg-emerald-400/5 rounded-full px-3 py-1.5 mb-6">
@@ -330,7 +446,7 @@
         Turning commercial instinct and financial rigor into dashboards that find where the money leaks.
       </h1>
       <p class="mt-6 text-slate-400 text-lg max-w-xl leading-relaxed">
-        I'm Ragab Samir — seven years running showroom accounts, SEO campaigns, and communities before moving into Power BI. That background means I build models around what a business actually decides on, not just what the data happens to contain.
+        I'm Ragab Samir — seven years spanning comprehensive financial accounting, digital growth, and community management before moving into data analytics using Power BI, Excel, DAX, Python, and Tableau. That background means I build models around what a business actually decides on, not just what the data happens to contain.
       </p>
 
       <div class="mt-9 flex flex-wrap gap-4">
@@ -356,16 +472,16 @@
       </div>
     </div>
 
-	    <!-- Live metric stack -->
-	    <div class="relative fade-up" style="animation-delay:.15s">
-	      <div class="profile-photo rounded-[1.5rem] overflow-hidden max-w-[22rem] mx-auto mb-8 border border-cyan-300/30 bg-slate-900">
-	        <img src="images/ragab-samir-profile.jfif" alt="Ragab Samir — Data Analyst" class="block w-full aspect-square object-cover object-center" loading="eager">
-	        <div class="absolute inset-x-0 bottom-0 z-10 p-5">
-	          <div class="text-xs font-mono text-emerald-300 tracking-wider uppercase">Data Analyst</div>
-	          <div class="font-display text-xl text-white mt-1">Ragab Samir</div>
-	        </div>
-	      </div>
-	      <div class="grad-border glass rounded-[1.25rem] p-6 sm:p-7 relative overflow-hidden">
+      <!-- Live metric stack -->
+      <div class="relative fade-up" style="animation-delay:.15s">
+        <div class="profile-photo rounded-[1.5rem] overflow-hidden max-w-[22rem] mx-auto mb-8 border border-cyan-300/30 bg-slate-900">
+          <img src="images/ragab-samir-profile.jfif" alt="Ragab Samir — Data Analyst" class="block w-full aspect-square object-cover object-center" loading="eager">
+          <div class="absolute inset-x-0 bottom-0 z-10 p-5">
+            <div class="text-xs font-mono text-emerald-300 tracking-wider uppercase">Data Analyst</div>
+            <div class="font-display text-xl text-white mt-1">Ragab Samir</div>
+          </div>
+        </div>
+        <div class="grad-border glass rounded-[1.25rem] p-6 sm:p-7 relative overflow-hidden">
         <div class="flex items-center justify-between mb-5">
           <span class="text-xs font-mono text-slate-500 tracking-wide">LIVE PORTFOLIO METRICS</span>
           <i data-lucide="activity" class="w-4 h-4 text-emerald-400"></i>
@@ -1193,6 +1309,91 @@ function showToast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
 }
+
+/* ---------- VIDEO INTRO PLAYER ---------- */
+(function(){
+  const viFrame = document.getElementById('viFrame');
+  const viVideo = document.getElementById('viVideo');
+  if (!viVideo) return;
+  const viCenterBtn = document.getElementById('viCenterBtn');
+  const viCenterIcon = document.getElementById('viCenterIcon');
+  const viPlayBtn = document.getElementById('viPlayBtn');
+  const viPlayIcon = document.getElementById('viPlayIcon');
+  const viMuteBtn = document.getElementById('viMuteBtn');
+  const viMuteOn = document.getElementById('viMuteIconOn');
+  const viMuteOff = document.getElementById('viMuteIconOff');
+  const viTrack = document.getElementById('viProgressTrack');
+  const viFill = document.getElementById('viProgressFill');
+  const viTime = document.getElementById('viTime');
+
+  const PAUSE_ICON = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+  const PLAY_ICON = '<path d="M8 5v14l11-7z"/>';
+
+  function formatTime(sec) {
+    if (isNaN(sec)) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return m + ':' + (s < 10 ? '0' + s : s);
+  }
+
+  function setPlayingUI(isPlaying) {
+    viFrame.classList.toggle('vi-paused', !isPlaying);
+    viPlayIcon.innerHTML = isPlaying ? PAUSE_ICON : PLAY_ICON;
+    viCenterIcon.innerHTML = isPlaying ? PAUSE_ICON : PLAY_ICON;
+  }
+
+  function toggleVideoPlay() {
+    if (viVideo.paused) { viVideo.play(); } else { viVideo.pause(); }
+  }
+
+  viPlayBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleVideoPlay(); });
+  viCenterBtn.addEventListener('click', toggleVideoPlay);
+  viFrame.addEventListener('click', (e) => {
+    if (e.target === viFrame || e.target === viVideo) toggleVideoPlay();
+  });
+
+  viMuteBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    viVideo.muted = !viVideo.muted;
+    viMuteOn.style.display = viVideo.muted ? 'none' : 'block';
+    viMuteOff.style.display = viVideo.muted ? 'block' : 'none';
+  });
+
+  viVideo.addEventListener('play', () => setPlayingUI(true));
+  viVideo.addEventListener('pause', () => setPlayingUI(false));
+
+  viVideo.addEventListener('timeupdate', () => {
+    const pct = (viVideo.currentTime / viVideo.duration) * 100 || 0;
+    viFill.style.width = pct + '%';
+    viTime.textContent = formatTime(viVideo.currentTime);
+  });
+
+  viTrack.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const rect = viTrack.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    viVideo.currentTime = pct * (viVideo.duration || 0);
+  });
+
+  // Seamless autoplay: play (muted) once in view, pause when scrolled away.
+  if ('IntersectionObserver' in window) {
+    const viObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          viVideo.muted = true;
+          viMuteOn.style.display = 'none';
+          viMuteOff.style.display = 'block';
+          const playPromise = viVideo.play();
+          if (playPromise !== undefined) { playPromise.catch(() => { /* autoplay blocked, ignore */ }); }
+        } else {
+          viVideo.pause();
+        }
+      });
+    }, { threshold: 0.4 });
+    viObserver.observe(viFrame);
+  }
+})();
+
 </script>
 </body>
 </html>
