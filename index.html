@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>try{var __t=localStorage.getItem('rs-theme');if(__t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}</script>
 <title>Ragab Samir — Data Intelligence Portfolio</title>
 <meta name="description" content="Ragab Samir, Junior Data Analyst — BI dashboards, financial diagnostics, and revenue analytics built in Power BI." />
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -344,6 +345,74 @@
     padding:5px 10px; border-radius:9999px;
     backdrop-filter:blur(4px);
   }
+
+  /* ===== Light theme ===== */
+  html[data-theme="light"]{
+    color-scheme:light;
+    --bg-void:#F3F6FB; --bg-panel:#FFFFFF; --bg-panel-2:#EAF0F8;
+    --border-glass:rgba(15,23,42,0.12); --border-glass-hi:rgba(15,23,42,0.26);
+    --cyan:#0891B2; --emerald:#059669;
+    --text-hi:#0F172A; --text-mid:#475569; --text-low:#64748B;
+  }
+  html[data-theme="light"] .glass{background:linear-gradient(180deg,rgba(255,255,255,0.92),rgba(255,255,255,0.7));box-shadow:0 1px 2px rgba(15,23,42,0.05);}
+  html[data-theme="light"] #navbar.scrolled{background:rgba(243,246,251,0.85);}
+  html[data-theme="light"] .glow-orb{opacity:0.1;}
+  html[data-theme="light"] .bg-grid{background-image:linear-gradient(rgba(15,23,42,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,0.05) 1px,transparent 1px);}
+  html[data-theme="light"] .img-frame{background:radial-gradient(circle at 30% 20%,#E2EAF5,#D3DEEE 70%);}
+  html[data-theme="light"] .timeline-dot{box-shadow:0 0 0 4px #F3F6FB,0 0 0 5px var(--border-glass);}
+  html[data-theme="light"] ::-webkit-scrollbar-thumb{background:#CBD5E1;}
+  html[data-theme="light"] ::-webkit-scrollbar-thumb:hover{background:#94A3B8;}
+  html[data-theme="light"] .text-gradient{background:linear-gradient(100deg,#0891B2,#059669);-webkit-background-clip:text;background-clip:text;}
+  html[data-theme="light"] .text-white,
+  html[data-theme="light"] .text-slate-100,
+  html[data-theme="light"] .text-slate-200{color:#0F172A;}
+  html[data-theme="light"] .text-slate-300{color:#1E293B;}
+  html[data-theme="light"] .text-slate-400{color:#475569;}
+  html[data-theme="light"] .text-slate-500{color:#5B6B85;}
+  html[data-theme="light"] .text-slate-600{color:#64748B;}
+  html[data-theme="light"] .text-cyan-300,
+  html[data-theme="light"] .text-cyan-400{color:#0E7490;}
+  html[data-theme="light"] .text-emerald-300,
+  html[data-theme="light"] .text-emerald-400{color:#047857;}
+  html[data-theme="light"] .text-rose-400{color:#E11D48;}
+  html[data-theme="light"] .service-cta:hover{color:#164E63;}
+  html[data-theme="light"] [class*="bg-white/"]{background-color:rgba(15,23,42,0.04);}
+  html[data-theme="light"] [class*="border-white/"]{border-color:rgba(15,23,42,0.1);}
+  html[data-theme="light"] [class*="bg-[#0F172A]"]{background-color:#FFFFFF;}
+  html[data-theme="light"] .profile-photo .text-white{color:#FFFFFF;}
+  html[data-theme="light"] .profile-photo .text-emerald-300{color:#6EE7B7;}
+  html[data-theme="light"] .project-card [class*="bg-black/"]{background-color:rgba(255,255,255,0.85);}
+
+  /* Toggle buttons: show the icon for the mode you'd switch TO */
+  html:not([data-theme="light"]) .ic-moon{display:none;}
+  html[data-theme="light"] .ic-sun{display:none;}
+  .ctl-btn{transition:border-color .25s ease, transform .25s ease;}
+  .ctl-btn:hover{border-color:var(--cyan);}
+  .ctl-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+
+  /* ===== Arabic / RTL ===== */
+  html[lang="ar"] body,
+  html[lang="ar"] .font-display{font-family:'Cairo','Inter',sans-serif;}
+  html[lang="ar"] *{letter-spacing:0 !important;}
+  html[lang="ar"] .lucide-arrow-right{transform:scaleX(-1);}
+  html[dir="rtl"] [id^="modal-"]{direction:ltr;text-align:left;}
+  html[dir="rtl"] .kpi-figure,
+  html[dir="rtl"] #techGroupBI,html[dir="rtl"] #techGroupSystems,html[dir="rtl"] #techGroupBiz{direction:ltr;}
+  html[dir="rtl"] #contactForm input[type="email"]{direction:ltr;text-align:right;}
+
+  /* ===== Tech arsenal ===== */
+  .tool-ic{width:2.25rem;height:2.25rem;flex:none;display:flex;align-items:center;justify-content:center;border-radius:.65rem;
+    color:var(--accent,var(--cyan));
+    background:color-mix(in srgb,var(--accent,var(--cyan)) 10%,transparent);
+    border:1px solid color-mix(in srgb,var(--accent,var(--cyan)) 25%,transparent);}
+  .tool-row{display:flex;align-items:flex-start;gap:.9rem;padding:.85rem .6rem;border-radius:.75rem;transition:background .2s ease;}
+  .tool-row + .tool-row{border-top:1px solid var(--border-glass);border-top-left-radius:0;border-top-right-radius:0;}
+  .tool-row:hover{background:color-mix(in srgb,var(--accent,var(--cyan)) 7%,transparent);}
+  /* ===== Credentials ===== */
+  .cred-card{transition:transform .25s ease, border-color .25s ease;}
+  .cred-card:hover{transform:translateY(-3px);border-color:var(--border-glass-hi);}
+  .cred-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;}
+  .cred-head .rule{height:1px;flex:1;background:var(--border-glass);}
 </style>
 </head>
 <body class="antialiased">
@@ -356,14 +425,15 @@
 
 <!-- ============ NAVBAR ============ -->
   <nav id="navbar" class="fixed top-0 inset-x-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
-      <a href="#top" class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center gap-6 h-20">
+      <a href="#top" class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight shrink-0">
         <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center text-[#04121A] text-sm font-bold">RS</span>
-        <span class="hidden sm:inline text-slate-200">Ragab Samir <span class="text-slate-500 font-normal">|</span> Data Analyst</span>
+        <span class="hidden sm:inline xl:hidden 2xl:inline text-slate-200 whitespace-nowrap">Ragab Samir <span class="text-slate-500 font-normal">|</span> Data Analyst</span>
       </a>
 
-    <div class="hidden lg:flex items-center gap-8 text-sm">
+    <div class="hidden xl:flex flex-1 items-center justify-center gap-7 text-sm whitespace-nowrap">
       <a href="#about" class="nav-link">About</a>
+      <a href="#services" class="nav-link">Services</a>
       <a href="#case-studies" class="nav-link">Case Studies</a>
       <a href="#calculator" class="nav-link">Impact Calculator</a>
       <a href="#tech-stack" class="nav-link">Tech Stack</a>
@@ -371,20 +441,27 @@
       <a href="#contact" class="nav-link">Contact</a>
     </div>
 
-    <div class="flex items-center gap-2 sm:gap-3">
-      <a href="Ragab_Samir_CV.pdf" download="Ragab_Samir_CV.pdf" class="btn-ghost hidden lg:inline-flex items-center gap-1.5 text-xs px-3.5 py-2 rounded-lg">
-        <i data-lucide="download" class="w-3.5 h-3.5"></i> Download CV
+    <div class="flex items-center gap-2.5 sm:gap-3 shrink-0 ms-auto xl:ms-0">
+      <button id="langToggle" type="button" class="ctl-btn glass h-10 min-w-[4.5rem] px-3 rounded-lg inline-flex items-center justify-center gap-1.5 text-xs font-mono" aria-label="Switch language / تغيير اللغة">
+        <i data-lucide="languages" class="w-4 h-4"></i><span id="langLabel">عربي</span>
+      </button>
+      <button id="themeToggle" type="button" class="ctl-btn glass w-10 h-10 rounded-lg inline-flex items-center justify-center" aria-label="Toggle light / dark mode">
+        <i data-lucide="sun" class="ic-sun w-4 h-4"></i><i data-lucide="moon" class="ic-moon w-4 h-4"></i>
+      </button>
+      <a href="Ragab_Samir_CV.pdf" download="Ragab_Samir_CV.pdf" class="ctl-btn glass hidden sm:inline-flex w-10 h-10 rounded-lg items-center justify-center" aria-label="Download CV" title="Download CV">
+        <i data-lucide="download" class="w-4 h-4"></i>
       </a>
-      <a href="#contact" class="hidden sm:inline-flex btn-primary text-sm px-4 py-2.5 rounded-lg">Book a Consultation</a>
-      <button id="menuToggle" class="lg:hidden w-10 h-10 rounded-lg glass flex items-center justify-center" aria-label="Toggle menu" aria-expanded="false">
+      <a href="#contact" class="hidden sm:inline-flex items-center justify-center h-10 btn-primary text-sm px-5 rounded-lg whitespace-nowrap">Book a Consultation</a>
+      <button id="menuToggle" class="ctl-btn xl:hidden w-10 h-10 rounded-lg glass flex items-center justify-center" aria-label="Toggle menu" aria-expanded="false">
         <i data-lucide="menu" class="w-5 h-5"></i>
       </button>
     </div>
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobileMenu" class="lg:hidden hidden glass border-t border-white/5 px-6 py-5 flex flex-col gap-4 text-sm">
+  <div id="mobileMenu" class="xl:hidden hidden glass border-t border-white/5 px-6 py-5 flex flex-col gap-4 text-sm">
     <a href="#about" class="nav-link">About</a>
+    <a href="#services" class="nav-link">Services</a>
     <a href="#case-studies" class="nav-link">Case Studies</a>
     <a href="#calculator" class="nav-link">Impact Calculator</a>
     <a href="#tech-stack" class="nav-link">Tech Stack</a>
@@ -446,7 +523,7 @@
         Turning commercial instinct and financial rigor into dashboards that find where the money leaks.
       </h1>
       <p class="mt-6 text-slate-400 text-lg max-w-xl leading-relaxed">
-        I'm Ragab Samir — seven years spanning comprehensive financial accounting, digital growth, and community management before moving into data analytics using Power BI, Excel, DAX, Python, and Tableau. That background means I build models around what a business actually decides on, not just what the data happens to contain.
+        I'm Ragab Samir — seven years spanning comprehensive financial accounting, digital growth, and community management before moving into data analytics using Power BI, Excel, DAX, Python, and SQL. That background means I build models around what a business actually decides on, not just what the data happens to contain.
       </p>
 
       <div class="mt-9 flex flex-wrap gap-4">
@@ -551,6 +628,88 @@
         <p class="text-sm text-slate-500 leading-relaxed">SQL databases, merged relational tables, and advanced DAX across real-world training datasets.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="relative px-6 lg:px-10 py-20 border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-2xl">
+      <h2 class="font-display text-3xl text-slate-100">How I can help your business grow</h2>
+      <p class="text-slate-400 mt-4 leading-relaxed">Stop wrestling with spreadsheets. I turn your raw data into clear, automated insights that drive profitable decisions.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6 mt-12">
+
+      <!-- Service 1 -->
+      <article class="grad-border glass glass-hover rounded-2xl p-7 flex flex-col">
+        <div class="w-11 h-11 rounded-xl bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center">
+          <i data-lucide="database-zap" class="w-5 h-5 text-cyan-300"></i>
+        </div>
+        <h3 class="font-display text-xl text-slate-100 mt-5">Data Cleaning &amp; Pipeline Automation</h3>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed">I take your messy, unstructured data from multiple sources (ERPs, CSVs, APIs) and build automated Power Query pipelines.</p>
+        <div class="mt-6 rounded-xl bg-emerald-400/5 border border-emerald-400/20 p-4">
+          <div class="text-xs font-mono text-emerald-300 mb-1.5">Result</div>
+          <p class="text-sm text-slate-300 leading-relaxed">Save 5+ hours weekly on manual data prep and guarantee 100% reporting accuracy.</p>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">Power Query</span>
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">ERP exports</span>
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">CSV</span>
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">API</span>
+        </div>
+        <a href="#contact" data-service="Data Cleaning & Pipeline Automation" class="service-cta mt-auto pt-7 text-sm text-cyan-300 hover:text-cyan-200 inline-flex items-center gap-2 transition-colors">
+          Discuss this service <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </article>
+
+      <!-- Service 2 -->
+      <article class="grad-border glass glass-hover rounded-2xl p-7 flex flex-col">
+        <div class="w-11 h-11 rounded-xl bg-emerald-400/10 border border-emerald-400/25 flex items-center justify-center">
+          <i data-lucide="layout-dashboard" class="w-5 h-5 text-emerald-300"></i>
+        </div>
+        <h3 class="font-display text-xl text-slate-100 mt-5">Custom Executive Dashboards</h3>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed">I design interactive Power BI dashboards focused on the metrics that actually matter to your bottom line.</p>
+        <div class="mt-6 rounded-xl bg-emerald-400/5 border border-emerald-400/20 p-4">
+          <div class="text-xs font-mono text-emerald-300 mb-1.5">Result</div>
+          <p class="text-sm text-slate-300 leading-relaxed">Real-time visibility into your sales, liquidity, or inventory without waiting for end-of-month reports.</p>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">Power BI</span>
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">Sales</span>
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">Liquidity</span>
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">Inventory</span>
+        </div>
+        <a href="#contact" data-service="Custom Executive Dashboards" class="service-cta mt-auto pt-7 text-sm text-cyan-300 hover:text-cyan-200 inline-flex items-center gap-2 transition-colors">
+          Discuss this service <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </article>
+
+      <!-- Service 3 -->
+      <article class="grad-border glass glass-hover rounded-2xl p-7 flex flex-col">
+        <div class="w-11 h-11 rounded-xl bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center">
+          <i data-lucide="search-check" class="w-5 h-5 text-cyan-300"></i>
+        </div>
+        <h3 class="font-display text-xl text-slate-100 mt-5">Financial &amp; Sales Diagnostics</h3>
+        <p class="text-sm text-slate-400 mt-3 leading-relaxed">Leveraging my 7 years of operational and accounting experience, I build relational models (Star Schemas) and advanced DAX formulas to uncover hidden margin leaks and growth opportunities.</p>
+        <div class="mt-6 rounded-xl bg-emerald-400/5 border border-emerald-400/20 p-4">
+          <div class="text-xs font-mono text-emerald-300 mb-1.5">Result</div>
+          <p class="text-sm text-slate-300 leading-relaxed">Actionable insights that tell you &ldquo;why&rdquo; something happened, not just &ldquo;what&rdquo; happened.</p>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">Star Schema</span>
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">DAX</span>
+          <span class="text-[11px] font-mono text-slate-400 border border-white/10 rounded-full px-2.5 py-1">Margin analysis</span>
+        </div>
+        <a href="#contact" data-service="Financial & Sales Diagnostics" class="service-cta mt-auto pt-7 text-sm text-cyan-300 hover:text-cyan-200 inline-flex items-center gap-2 transition-colors">
+          Discuss this service <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </article>
+    </div>
+
+    <p class="mt-8 text-sm text-slate-500">
+      Want to see the work first? <a href="#case-studies" class="text-slate-300 underline decoration-white/20 underline-offset-4 hover:decoration-cyan-400 transition-colors">Browse the case studies</a> for live examples of each service.
+    </p>
   </div>
 </section>
 
@@ -710,40 +869,40 @@
 <!-- ============ TECH STACK ============ -->
 <section id="tech-stack" class="relative px-6 lg:px-10 py-20 border-t border-white/5">
   <div class="max-w-7xl mx-auto">
-    <h2 class="font-display text-3xl text-slate-100">Technical arsenal</h2>
-    <p class="text-slate-500 mt-2 max-w-lg">Hover any tool to see how it actually shows up in the workflow.</p>
-
-    <div class="mt-10 space-y-9">
-      <div>
-        <div class="text-xs font-mono text-cyan-300 tracking-wide mb-4">BI &amp; ANALYTICS</div>
-        <div class="flex flex-wrap gap-3" id="techGroupBI"></div>
-      </div>
-      <div>
-        <div class="text-xs font-mono text-emerald-300 tracking-wide mb-4">DATA SYSTEMS &amp; FOUNDATIONS</div>
-        <div class="flex flex-wrap gap-3" id="techGroupSystems"></div>
-      </div>
-      <div>
-        <div class="text-xs font-mono text-slate-400 tracking-wide mb-4">BUSINESS ACUMEN</div>
-        <div class="flex flex-wrap gap-3" id="techGroupBiz"></div>
-      </div>
+    <div class="max-w-2xl">
+      <h2 class="font-display text-3xl text-slate-100">Technical arsenal</h2>
+      <p class="text-slate-500 mt-3 leading-relaxed">Tools I use day to day, and where each one shows up in the workflow.</p>
     </div>
+    <div id="techGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10"></div>
   </div>
 </section>
 
 <!-- ============ CREDENTIALS ============ -->
 <section id="credentials" class="relative px-6 lg:px-10 py-20 border-t border-white/5">
-  <div class="max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-14">
-    <div>
-      <h2 class="font-display text-3xl text-slate-100">Track record &amp; credentials</h2>
-      <p class="text-slate-500 mt-4 leading-relaxed max-w-sm">Commerce degree, then a deliberate re-tooling into data — scholar programs, applied certifications, and hands-on roles stacked from 2018 through today.</p>
-      <button id="openResumeModal" class="btn-primary mt-7 px-5 py-3 rounded-lg text-sm inline-flex items-center gap-2">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <h2 class="font-display text-3xl text-slate-100">Track record &amp; credentials</h2>
+        <p class="text-slate-500 mt-3 leading-relaxed">Commerce degree, then a deliberate re-tooling into data — scholar programs, applied certifications, and hands-on roles stacked from 2018 through today.</p>
+      </div>
+      <button id="openResumeModal" class="btn-primary px-5 py-3 rounded-lg text-sm inline-flex items-center gap-2 shrink-0 self-start lg:self-auto">
         <i data-lucide="file-text" class="w-4 h-4"></i> Preview Resume
       </button>
     </div>
 
-    <div class="relative pl-8" id="timelineList">
-      <div class="absolute left-[7px] top-1 bottom-1 w-px timeline-line"></div>
-      <!-- items injected by JS -->
+    <div class="mt-12">
+      <div class="cred-head"><i data-lucide="briefcase" class="w-4 h-4 text-cyan-300"></i><h3 class="font-mono text-xs tracking-wide text-cyan-300">PROFESSIONAL EXPERIENCE</h3><div class="rule"></div></div>
+      <div id="credExperience" class="grid md:grid-cols-2 gap-5"></div>
+    </div>
+
+    <div class="mt-12">
+      <div class="cred-head"><i data-lucide="graduation-cap" class="w-4 h-4 text-emerald-300"></i><h3 class="font-mono text-xs tracking-wide text-emerald-300">EDUCATION &amp; PROGRAMS</h3><div class="rule"></div></div>
+      <div id="credEducation" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </div>
+
+    <div class="mt-12">
+      <div class="cred-head"><i data-lucide="award" class="w-4 h-4 text-slate-400"></i><h3 class="font-mono text-xs tracking-wide text-slate-400">TRAINING CERTIFICATES</h3><div class="rule"></div></div>
+      <div id="credCerts" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
     </div>
   </div>
 </section>
@@ -776,6 +935,9 @@
             <option value="" class="bg-[#0F172A]">Select one</option>
             <option value="Full-time Hiring" class="bg-[#0F172A]">Full-time Hiring</option>
             <option value="Freelance BI Project" class="bg-[#0F172A]">Freelance BI Project</option>
+            <option value="Data Cleaning & Pipeline Automation" class="bg-[#0F172A]">Service: Data Cleaning &amp; Pipeline Automation</option>
+            <option value="Custom Executive Dashboards" class="bg-[#0F172A]">Service: Custom Executive Dashboards</option>
+            <option value="Financial & Sales Diagnostics" class="bg-[#0F172A]">Service: Financial &amp; Sales Diagnostics</option>
             <option value="Consulting" class="bg-[#0F172A]">Consulting</option>
             <option value="Quick Chat" class="bg-[#0F172A]">Quick Chat</option>
           </select>
@@ -842,6 +1004,7 @@
     </div>
     <div class="flex gap-6 text-xs">
       <a href="#about" class="hover:text-slate-300 transition-colors">About</a>
+      <a href="#services" class="hover:text-slate-300 transition-colors">Services</a>
       <a href="#case-studies" class="hover:text-slate-300 transition-colors">Case Studies</a>
       <a href="#contact" class="hover:text-slate-300 transition-colors">Contact</a>
     </div>
@@ -1149,62 +1312,101 @@ document.querySelectorAll('.modal-panel').forEach(panel => {
   });
 });
 
-/* ---------- TECH STACK PILLS ---------- */
-const techData = {
-  techGroupBI: [
-    ['Power BI', 'Model layer, DAX measures, and report design end to end.'],
-    ['Power Query', 'Data cleaning, date-format fixes, and merging relational extracts.'],
-    ['DAX', 'Time intelligence, iterator functions, and dynamic margin calculations.'],
-    ['Looker', 'Exploring LookML-defined models for cross-team reporting.'],
-    ['Excel', 'Advanced modeling, pivot analysis, and rapid stakeholder mockups.'],
-  ],
-  techGroupSystems: [
-    ['SQL Databases', 'Writing and reading relational queries behind the data model.'],
-    ['Python', 'Scripting data checks and repetitive cleaning tasks.'],
-    ['Star Schema Modeling', 'Structuring facts and dimensions for fast, reliable DAX.'],
-    ['Agile Methodologies', 'Iterating dashboards in short cycles with stakeholder feedback.'],
-  ],
-  techGroupBiz: [
-    ['Financial Diagnostics', 'Reading margin, discount, and liquidity data like a set of books.'],
-    ['Margin Optimization', 'Flagging where discounting quietly erodes profit.'],
-    ['Growth &amp; SEO Analytics', 'Metrics-led content and traffic strategy from 7 years freelancing.'],
-  ],
-};
-Object.entries(techData).forEach(([groupId, items]) => {
-  const container = document.getElementById(groupId);
-  items.forEach(([name, tip]) => {
-    const pill = document.createElement('div');
-    pill.className = 'tech-pill rounded-full px-4 py-2 text-sm text-slate-300 cursor-default';
-    pill.innerHTML = `${name}<div class="tech-tooltip glass rounded-lg p-3 text-xs text-slate-400 leading-relaxed text-left">${tip}</div>`;
-    container.appendChild(pill);
-  });
+/* ---------- TECH ARSENAL ---------- */
+const techGroups = [
+  { title:'BI &amp; ANALYTICS', icon:'layout-dashboard', accent:'var(--cyan)', items:[
+    ['layout-dashboard','Power BI','Model layer, DAX measures, and report design end to end.'],
+    ['workflow','Power Query','Data cleaning, date-format fixes, and merging relational extracts.'],
+    ['sigma','DAX','Time intelligence, iterator functions, and dynamic margin calculations.'],
+    ['activity','Looker','Exploring LookML-defined models for cross-team reporting.'],
+    ['table','Excel','Advanced modeling, pivot analysis, and rapid stakeholder mockups.'],
+  ]},
+  { title:'DATA SYSTEMS &amp; FOUNDATIONS', icon:'database', accent:'var(--emerald)', items:[
+    ['database','SQL Databases','Writing and reading relational queries behind the data model.'],
+    ['terminal','Python','Scripting data checks and repetitive cleaning tasks.'],
+    ['network','Star Schema Modeling','Structuring facts and dimensions for fast, reliable DAX.'],
+    ['refresh-cw','Agile Methodologies','Iterating dashboards in short cycles with stakeholder feedback.'],
+  ]},
+  { title:'BUSINESS ACUMEN', icon:'briefcase', accent:'#A5B4FC', items:[
+    ['scale','Financial Diagnostics','Reading margin, discount, and liquidity data like a set of books.'],
+    ['percent','Margin Optimization','Flagging where discounting quietly erodes profit.'],
+    ['trending-up','Growth &amp; SEO Analytics','Metrics-led content and traffic strategy from 7 years freelancing.'],
+  ]},
+];
+const techGrid = document.getElementById('techGrid');
+techGroups.forEach(g => {
+  const card = document.createElement('div');
+  card.className = 'grad-border glass rounded-2xl p-6';
+  card.style.setProperty('--accent', g.accent);
+  card.innerHTML = `
+    <div class="flex items-center gap-3 pb-4">
+      <div class="tool-ic"><i data-lucide="${g.icon}" class="w-4 h-4"></i></div>
+      <h3 class="font-mono text-xs tracking-wide" style="color:var(--accent)">${g.title}</h3>
+      <span class="ms-auto font-mono text-[11px] text-slate-500">${String(g.items.length).padStart(2,'0')}</span>
+    </div>
+    <div>
+      ${g.items.map(([ic,name,tip]) => `
+        <div class="tool-row">
+          <div class="tool-ic"><i data-lucide="${ic}" class="w-4 h-4"></i></div>
+          <div class="min-w-0">
+            <div class="text-sm font-medium text-slate-100">${name}</div>
+            <div class="text-xs text-slate-500 leading-relaxed mt-0.5">${tip}</div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+  techGrid.appendChild(card);
 });
 
-/* ---------- CREDENTIALS TIMELINE ---------- */
-const timelineItems = [
-  ['07/2026 – Present', 'Junior Data Analyst (Trainee)', 'Digital Egypt Pioneers Initiative (DEPI) — 10+ end-to-end BI projects on real datasets, improving data accuracy by 40% and decision speed by 25%.'],
-  ['02/2019 – 07/2022', 'Accountant &amp; Showroom Manager (Housewares)', 'Commercial Showroom — daily financial reporting at 100% precision, plus inventory audits that cut stock discrepancies by 15%.'],
-  ['02/2020 – 08/2023', 'Digital Marketing &amp; Social Media Specialist', 'Freelance / Independent — grew engagement 50% while moderating a community of over 1 million members.'],
-  ['03/2017 – 10/2024', 'Freelance Website Manager, Content Writer &amp; SEO Specialist', 'Freelance — scaled a Blogger site to 150,000 monthly visitors through SEO and Agile content workflows.'],
-  ['08/2026 – Present', 'Google Data Analytics Professional Certificate', 'Google (Coursera)'],
-  ['08/2026', 'AI for You: Training and Assessment', 'Oracle'],
-  ['08/2026', 'Data Fundamentals', 'IBM SkillsBuild'],
-  ['07/2026', 'AI Ambassadors Program (Advanced Level)', 'NTI &amp; ESE'],
-  ['05/2026 – Present', 'Data Analysis Track Scholar', 'Digital Egypt Pioneers Initiative (DEPI)'],
-  ['03/2018', 'Bachelor of Commerce', 'Beni Suef University'],
+/* ---------- CREDENTIALS ---------- */
+const credCard = ({icon, date, title, org, desc, badge, featured}) => `
+  <article class="cred-card glass ${featured ? 'grad-border' : ''} rounded-2xl p-6 flex flex-col">
+    <div class="flex items-center gap-3">
+      <div class="tool-ic"><i data-lucide="${icon}" class="w-4 h-4"></i></div>
+      <span class="font-mono text-[11px] text-slate-400 border border-white/10 rounded-full px-2.5 py-1">${date}</span>
+      ${badge ? `<span class="ms-auto font-mono text-[11px] text-emerald-300 bg-emerald-400/10 border border-emerald-400/25 rounded-full px-2.5 py-1">${badge}</span>` : ''}
+    </div>
+    <h4 class="font-display text-lg text-slate-100 mt-4 leading-snug">${title}</h4>
+    <div class="text-sm text-cyan-300 mt-1">${org}</div>
+    ${desc ? `<p class="text-sm text-slate-400 mt-3 leading-relaxed">${desc}</p>` : ''}
+  </article>`;
+
+const experience = [
+  {icon:'briefcase', date:'07/2026 – Present', title:'Junior Data Analyst (Trainee)', org:'Digital Egypt Pioneers Initiative (DEPI)', desc:'10+ end-to-end BI projects on real datasets, improving data accuracy by 40% and decision speed by 25%.', badge:'Current', featured:true},
+  {icon:'briefcase', date:'03/2017 – 10/2024', title:'Freelance Website Manager, Content Writer &amp; SEO Specialist', org:'Freelance', desc:'Scaled a Blogger site to 150,000 monthly visitors through SEO and Agile content workflows.'},
+  {icon:'briefcase', date:'02/2020 – 08/2023', title:'Digital Marketing &amp; Social Media Specialist', org:'Freelance / Independent', desc:'Grew engagement 50% while moderating a community of over 1 million members.'},
+  {icon:'briefcase', date:'02/2019 – 07/2022', title:'Accountant &amp; Showroom Manager (Housewares)', org:'Commercial Showroom', desc:'Daily financial reporting at 100% precision, plus inventory audits that cut stock discrepancies by 15%.'},
 ];
-const timelineList = document.getElementById('timelineList');
-timelineItems.forEach(([date, title, org]) => {
-  const item = document.createElement('div');
-  item.className = 'relative pb-8 last:pb-0';
-  item.innerHTML = `
-    <div class="timeline-dot absolute -left-8 top-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-400"></div>
-    <div class="text-xs font-mono text-slate-500">${date}</div>
-    <div class="text-slate-100 font-medium mt-1">${title}</div>
-    <div class="text-sm text-slate-500 leading-relaxed">${org}</div>
-  `;
-  timelineList.appendChild(item);
-});
+const education = [
+  {icon:'graduation-cap', date:'05/2026 – Present', title:'Data Analysis Track Scholar', org:'Digital Egypt Pioneers Initiative (DEPI)', badge:'Current'},
+  {icon:'award', date:'08/2026 – Present', title:'Google Data Analytics Professional Certificate', org:'Google (Coursera)', badge:'In progress'},
+  {icon:'graduation-cap', date:'03/2018', title:'Bachelor of Commerce', org:'Beni Suef University'},
+];
+const certs = [
+  ['08/2026','AI for You: Training and Assessment','Oracle'],
+  ['08/2026','Data Fundamentals','IBM SkillsBuild'],
+  ['07/2026','AI Ambassadors Program (Advanced Level)','NTI &amp; ESE'],
+  ['04/2026','Artificial Intelligence Training and Assessment','NTI &amp; ESE'],
+  ['03/2026','AI for Digital Marketing: Applications in Online Business','ITI (Mahara-Tech)'],
+  ['03/2026','1 Million Prompters Initiative (Prompt Engineering)','Dubai Future Foundation &amp; DCAI'],
+  ['02/2026','Introduction to Artificial Intelligence','Edraak'],
+  ['02/2026','AI For Everyone (A4E)','ITI (Mahara-Tech)'],
+  ['06/2024','Search Engine Optimization (SEO)','Edraak'],
+  ['02/2022','Digital Marketing Challenger Track','Udacity &amp; Egypt FWD'],
+  ['11/2019','International Computer Driving License (ICDL) – Base','Edraak &amp; Specto'],
+  ['09/2018','Fundamentals of Digital Marketing','Google Digital Garage'],
+];
+document.getElementById('credExperience').innerHTML = experience.map(credCard).join('');
+document.getElementById('credEducation').innerHTML = education.map(credCard).join('');
+document.getElementById('credCerts').innerHTML = certs.map(([date,title,org]) => `
+  <div class="cred-card glass rounded-xl p-4 flex items-start gap-3">
+    <div class="tool-ic" style="--accent:var(--emerald)"><i data-lucide="award" class="w-4 h-4"></i></div>
+    <div class="min-w-0">
+      <div class="text-sm font-medium text-slate-100 leading-snug">${title}</div>
+      <div class="text-xs text-slate-500 mt-1">${org}</div>
+      <div class="font-mono text-[11px] text-slate-500 mt-2">${date}</div>
+    </div>
+  </div>`).join('');
+lucide.createIcons();
 
 /* ---------- ROI CALCULATOR ---------- */
 const hoursSlider = document.getElementById('hoursSlider');
@@ -1394,6 +1596,76 @@ function showToast(msg) {
   }
 })();
 
+
+// Services: preselect the inquiry type in the contact form
+document.querySelectorAll('.service-cta').forEach((link) => {
+  link.addEventListener('click', () => {
+    const sel = document.getElementById('inquiryType');
+    if (sel) sel.value = link.dataset.service;
+  });
+});
+
+// ===== Theme + Language toggles =====
+(function(){
+  const AR = {"About": "نبذة عني", "Services": "خدماتي", "Case Studies": "دراسات الحالة", "Impact Calculator": "حاسبة الأثر", "Tech Stack": "الأدوات التقنية", "Certifications": "الشهادات", "Contact": "تواصل معي", "Download CV": "تحميل السيرة الذاتية", "Book a Consultation": "احجز استشارة", "Data Analyst": "محلل بيانات", "Available for opportunities": "متاح لفرص العمل", "Turning commercial instinct and financial rigor into dashboards that find where the money leaks.": "تحويل الحس التجاري والدقة المالية إلى لوحات بيانات تكشف أين تتسرّب الأموال.", "I'm Ragab Samir — seven years spanning comprehensive financial accounting, digital growth, and community management before moving into data analytics using Power BI, Excel, DAX, Python, and SQL. That background means I build models around what a business actually decides on, not just what the data happens to contain.": "أنا رجب سمير — سبع سنوات بين المحاسبة المالية والنمو الرقمي وإدارة المجتمعات الإلكترونية، قبل أن أنتقل إلى تحليل البيانات باستخدام Power BI وExcel وDAX وPython وSQL. هذه الخلفية تجعلني أبني النماذج حول ما تتخذ الشركة قراراتها بشأنه فعلاً، لا حول ما تحتويه البيانات بالصدفة.", "Explore Projects": "استعرض المشاريع", "Contact Me": "تواصل معي", "Years operations & growth": "سنوات في العمليات والنمو", "Data Analysis Track Scholar": "منحة مسار تحليل البيانات", "End-to-end BI pipelines": "مسارات ذكاء أعمال متكاملة", "LIVE PORTFOLIO METRICS": "مؤشرات من أعمالي", "Net Revenue Analyzed": "صافي الإيرادات المحلَّلة", "Deposits & Balances Modeled": "الودائع والأرصدة المنمذجة", "Efficiency Lift Delivered": "تحسّن الكفاءة المحقق", "From showroom ledgers to star schemas": "من دفاتر المعرض إلى النماذج النجمية (Star Schemas)", "Before Power BI, I managed the books for a housewares showroom, ran SEO for sites pulling 150K monthly visitors, and moderated a community of over a million people. Every one of those roles came down to the same question: what changed, and why does it matter to the person paying attention.": "قبل Power BI، أدرتُ حسابات معرض أدوات منزلية، وقدتُ تحسين محركات البحث لمواقع تجاوزت 150 ألف زائر شهرياً، وأشرفتُ على مجتمع يزيد على مليون عضو. كل دور من هذه الأدوار كان يدور حول سؤال واحد: ما الذي تغيّر، ولماذا يهمّ من يتابع؟", "That's the lens I bring to data modeling now — star schemas built around business questions, DAX written for the metric a stakeholder will actually ask about, and dashboards that lead with the number that explains the trend, not just the trend itself.": "هذه هي العدسة التي أعمل بها اليوم: نماذج نجمية مبنية حول أسئلة العمل، وصيغ DAX تُكتب للمؤشر الذي سيسأل عنه صاحب القرار فعلاً، ولوحات تبدأ بالرقم الذي يفسّر الاتجاه لا بالاتجاه وحده.", "Accounting rigor": "الدقة المحاسبية", "Years of hands-on financial reporting and inventory audits, run at 100% precision on live showroom books.": "سنوات من إعداد التقارير المالية وجرد المخزون بدقة 100% على دفاتر معرض فعلي.", "Workflow automation": "أتمتة سير العمل", "Power Query pipelines that cut recurring manual data prep by 5+ hours a week per project.": "مسارات Power Query تقلّص التحضير اليدوي المتكرر للبيانات بأكثر من 5 ساعات أسبوعياً لكل مشروع.", "Growth & SEO analytics": "تحليلات النمو وSEO", "Metrics-led content and community strategy that scaled organic reach into the hundreds of thousands.": "استراتيجيات محتوى ومجتمع قائمة على المؤشرات رفعت الوصول العضوي إلى مئات الآلاف.", "Relational modeling": "النمذجة العلائقية", "SQL databases, merged relational tables, and advanced DAX across real-world training datasets.": "قواعد بيانات SQL وجداول علائقية مدمجة وصيغ DAX متقدمة على بيانات تدريبية واقعية.", "How I can help your business grow": "كيف أساعد عملك على النمو", "Stop wrestling with spreadsheets. I turn your raw data into clear, automated insights that drive profitable decisions.": "كفى صراعاً مع جداول البيانات. أحوّل بياناتك الخام إلى رؤى واضحة وآلية تدعم قرارات مربحة.", "Data Cleaning & Pipeline Automation": "تنظيف البيانات وأتمتة مسارات المعالجة", "I take your messy, unstructured data from multiple sources (ERPs, CSVs, APIs) and build automated Power Query pipelines.": "آخذ بياناتك غير المنظمة من مصادر متعددة (أنظمة ERP وملفات CSV وواجهات API) وأبني مسارات Power Query آلية.", "Result": "النتيجة", "Save 5+ hours weekly on manual data prep and guarantee 100% reporting accuracy.": "وفّر أكثر من 5 ساعات أسبوعياً من التحضير اليدوي، مع دقة 100% في التقارير.", "Discuss this service": "ناقش هذه الخدمة", "Custom Executive Dashboards": "لوحات تنفيذية مخصصة", "I design interactive Power BI dashboards focused on the metrics that actually matter to your bottom line.": "أصمم لوحات Power BI تفاعلية تركّز على المؤشرات التي تهمّ أرباحك فعلاً.", "Real-time visibility into your sales, liquidity, or inventory without waiting for end-of-month reports.": "رؤية فورية لمبيعاتك أو سيولتك أو مخزونك دون انتظار تقارير نهاية الشهر.", "ERP exports": "تصدير ERP", "Sales": "المبيعات", "Liquidity": "السيولة", "Inventory": "المخزون", "Margin analysis": "تحليل الهوامش", "Financial & Sales Diagnostics": "التشخيص المالي والمبيعاتي", "Leveraging my 7 years of operational and accounting experience, I build relational models (Star Schemas) and advanced DAX formulas to uncover hidden margin leaks and growth opportunities.": "بالاعتماد على 7 سنوات من الخبرة التشغيلية والمحاسبية، أبني نماذج علائقية (Star Schema) وصيغ DAX متقدمة لكشف تسرّب الهوامش وفرص النمو.", "Actionable insights that tell you “why” something happened, not just “what” happened.": "رؤى قابلة للتنفيذ تخبرك «لماذا» حدث الأمر، لا «ماذا» حدث فقط.", "Want to see the work first?": "تريد رؤية الأعمال أولاً؟", "Browse the case studies": "تصفّح دراسات الحالة", "for live examples of each service.": "لأمثلة حيّة على كل خدمة.", "Featured case studies": "دراسات حالة مختارة", "Three dashboards, three different businesses to defend: a retailer's margins, a bank's liquidity, and a distributor's territory quotas.": "ثلاث لوحات لثلاث أعمال مختلفة: هوامش متجر تجزئة، وسيولة بنك، وحصص مناطق موزّع.", "Filter case studies": "تصفية دراسات الحالة", "All": "الكل", "Financial Analytics": "تحليلات مالية", "Commercial Retail": "تجزئة تجارية", "Executive B2B": "B2B تنفيذي", "Retail · Profit Leakage": "تجزئة · تسرّب الأرباح", "Superstore Sales & Profitability Diagnostic": "تشخيص مبيعات وربحية Superstore", "Diagnosing margin leakage and negative returns on heavily discounted product lines.": "تشخيص تسرّب الهوامش والعوائد السلبية على خطوط المنتجات ذات الخصومات الكبيرة.", "Inspect Architecture & Insights": "استعرض البنية والرؤى", "Banking · Liquidity": "بنوك · السيولة", "Nile Bank: Retail Portfolio & Liquidity Analytics": "Nile Bank: تحليلات المحفظة والسيولة للأفراد", "Centralized executive view of branch cash positions, liquidity trends, and high-value customers.": "رؤية تنفيذية مركزية لمراكز النقد بالفروع واتجاهات السيولة وكبار العملاء.", "B2B · Quota Tracking": "B2B · متابعة الحصص", "Global B2B Sales & Territory Performance Analytics": "تحليلات المبيعات العالمية وأداء المناطق (B2B)", "AdventureWorks global distribution evaluation across North America and Europe.": "تقييم توزيع AdventureWorks عالمياً عبر أمريكا الشمالية وأوروبا.", "Profit": "الربح", "Margin": "الهامش", "Orders": "الطلبات", "Balances": "الأرصدة", "Avg Balance": "متوسط الرصيد", "Txn Volume": "حجم المعاملات", "Net Flow": "صافي التدفق", "Net Revenue": "صافي الإيرادات", "B2B Orders": "طلبات B2B", "Units Sold": "الوحدات المباعة", "Active Reps": "المندوبون النشطون", "ROI ESTIMATOR": "حاسبة العائد", "What manual reporting is actually costing you": "كم تكلّفك التقارير اليدوية فعلاً؟", "Based on the 35% efficiency lift and 5+ hours saved weekly seen on live automation work. Adjust the sliders for your team.": "مبني على تحسّن كفاءة 35% وتوفير 5+ ساعات أسبوعياً في أعمال أتمتة فعلية. عدّل المؤشرات لتناسب فريقك.", "Manual reporting hours / week, per person": "ساعات التقارير اليدوية أسبوعياً لكل شخص", "Team size handling reporting": "عدد أفراد الفريق المسؤول عن التقارير", "Blended hourly cost (USD)": "متوسط التكلفة بالساعة (دولار)", "hours saved / week": "ساعات موفّرة / أسبوع", "hours saved / year": "ساعات موفّرة / سنة", "estimated annual savings from automated BI workflows": "التوفير السنوي المقدّر من أتمتة سير عمل ذكاء الأعمال", "Illustrative estimate for conversation purposes, based on a 35% average efficiency gain from automating manual reporting — not a guaranteed outcome.": "تقدير توضيحي لأغراض النقاش، مبني على متوسط تحسّن كفاءة 35% من أتمتة التقارير اليدوية، وليس نتيجة مضمونة.", "Technical arsenal": "الأدوات التقنية", "Tools I use day to day, and where each one shows up in the workflow.": "الأدوات التي أستخدمها يومياً، وأين تظهر كل منها في سير العمل.", "BI & ANALYTICS": "ذكاء الأعمال والتحليلات", "DATA SYSTEMS & FOUNDATIONS": "أنظمة البيانات والأسس", "BUSINESS ACUMEN": "الفطنة التجارية", "Track record & credentials": "السجل المهني والشهادات", "Commerce degree, then a deliberate re-tooling into data — scholar programs, applied certifications, and hands-on roles stacked from 2018 through today.": "بكالوريوس تجارة، ثم إعادة تأهيل مقصودة نحو البيانات: منح تدريبية وشهادات تطبيقية وأدوار عملية متراكمة من 2018 حتى اليوم.", "Preview Resume": "معاينة السيرة الذاتية", "Start a conversation": "لنبدأ الحديث", "Full-time roles, freelance dashboards, or a quick technical question — all welcome.": "وظائف بدوام كامل أو لوحات بيانات حرة أو سؤال تقني سريع، والجميع مرحّب به.", "Full name": "الاسم الكامل", "Enter your name.": "أدخل اسمك.", "Work email": "البريد الإلكتروني للعمل", "Enter a valid email.": "أدخل بريداً إلكترونياً صحيحاً.", "Inquiry type": "نوع الطلب", "Select one": "اختر نوعاً", "Full-time Hiring": "توظيف بدوام كامل", "Freelance BI Project": "مشروع ذكاء أعمال حر", "Service: Data Cleaning & Pipeline Automation": "خدمة: تنظيف البيانات وأتمتة المسارات", "Service: Custom Executive Dashboards": "خدمة: لوحات تنفيذية مخصصة", "Service: Financial & Sales Diagnostics": "خدمة: التشخيص المالي والمبيعاتي", "Consulting": "استشارات", "Quick Chat": "دردشة سريعة", "Message": "الرسالة", "Add a short message.": "أضف رسالة قصيرة.", "Send message": "إرسال الرسالة", "Message sent — I'll reply within a day.": "تم الإرسال، سأرد خلال يوم.", "Based in Beni Suef, Egypt (GMT+2)": "مقيم في بني سويف، مصر (GMT+2)", "CURRENT FOCUS": "التركيز الحالي", "Junior Data Analyst Trainee at the Digital Egypt Pioneers Initiative — shipping end-to-end BI projects across real-world retail and banking datasets.": "محلل بيانات مبتدئ (متدرب) في مبادرة رواد مصر الرقمية، أنفّذ مشاريع ذكاء أعمال متكاملة على بيانات تجزئة وبنوك واقعية.", "Jane Cooper": "أحمد محمد", "Tell me a bit about what you're working on...": "أخبرني قليلاً عمّا تعمل عليه...", "Ragab Samir. Built with Power BI, DAX, and a commerce degree.": "رجب سمير. بُني بـ Power BI وDAX ودرجة في التجارة.", "Copied to clipboard!": "تم النسخ!"};
+  const root = document.documentElement;
+  const store = {
+    get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+    set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  };
+  Object.assign(AR, {"PROFESSIONAL EXPERIENCE": "الخبرة المهنية", "EDUCATION & PROGRAMS": "التعليم والبرامج", "TRAINING CERTIFICATES": "الشهادات التدريبية", "Current": "حالي", "In progress": "قيد الدراسة", "07/2026 – Present": "07/2026 – الآن", "05/2026 – Present": "05/2026 – الآن", "08/2026 – Present": "08/2026 – الآن", "Junior Data Analyst (Trainee)": "محلل بيانات مبتدئ (متدرب)", "Freelance Website Manager, Content Writer & SEO Specialist": "مدير مواقع ومحرر محتوى وأخصائي SEO (عمل حر)", "Digital Marketing & Social Media Specialist": "أخصائي تسويق رقمي ووسائل التواصل الاجتماعي", "Accountant & Showroom Manager (Housewares)": "محاسب ومدير معرض (أدوات منزلية)", "Digital Egypt Pioneers Initiative (DEPI)": "مبادرة رواد مصر الرقمية (DEPI)", "Freelance": "عمل حر", "Freelance / Independent": "عمل حر / مستقل", "Commercial Showroom": "معرض تجاري", "10+ end-to-end BI projects on real datasets, improving data accuracy by 40% and decision speed by 25%.": "أكثر من 10 مشاريع ذكاء أعمال متكاملة على بيانات واقعية، مع تحسين دقة البيانات بنسبة 40% وسرعة اتخاذ القرار بنسبة 25%.", "Scaled a Blogger site to 150,000 monthly visitors through SEO and Agile content workflows.": "رفع موقع على Blogger إلى 150 ألف زائر شهرياً عبر SEO وسير عمل محتوى بمنهجية Agile.", "Grew engagement 50% while moderating a community of over 1 million members.": "رفع التفاعل بنسبة 50% مع إدارة مجتمع يضم أكثر من مليون عضو.", "Daily financial reporting at 100% precision, plus inventory audits that cut stock discrepancies by 15%.": "تقارير مالية يومية بدقة 100%، إضافة إلى جرد مخزون قلّل فروقات المخزون بنسبة 15%.", "Google Data Analytics Professional Certificate": "شهادة Google المهنية في تحليل البيانات", "Bachelor of Commerce": "بكالوريوس تجارة", "Beni Suef University": "جامعة بني سويف", "AI for You: Training and Assessment": "الذكاء الاصطناعي لك: التدريب والتقييم", "Data Fundamentals": "أساسيات البيانات", "AI Ambassadors Program (Advanced Level)": "برنامج سفراء الذكاء الاصطناعي (المستوى المتقدم)", "Artificial Intelligence Training and Assessment": "تدريب وتقييم الذكاء الاصطناعي", "AI for Digital Marketing: Applications in Online Business": "الذكاء الاصطناعي للتسويق الرقمي: تطبيقات في الأعمال عبر الإنترنت", "1 Million Prompters Initiative (Prompt Engineering)": "مبادرة مليون مُوجِّه (هندسة الأوامر)", "Introduction to Artificial Intelligence": "مقدمة في الذكاء الاصطناعي", "AI For Everyone (A4E)": "الذكاء الاصطناعي للجميع (A4E)", "Search Engine Optimization (SEO)": "تحسين محركات البحث (SEO)", "Digital Marketing Challenger Track": "مسار التحدي في التسويق الرقمي", "International Computer Driving License (ICDL) – Base": "الرخصة الدولية لقيادة الحاسب (ICDL) – الأساسية", "Fundamentals of Digital Marketing": "أساسيات التسويق الرقمي", "SQL Databases": "قواعد بيانات SQL", "Star Schema Modeling": "نمذجة Star Schema", "Agile Methodologies": "منهجيات Agile", "Financial Diagnostics": "التشخيص المالي", "Margin Optimization": "تحسين الهوامش", "Growth & SEO Analytics": "تحليلات النمو وSEO", "Model layer, DAX measures, and report design end to end.": "بناء النموذج وقياسات DAX وتصميم التقرير من البداية إلى النهاية.", "Data cleaning, date-format fixes, and merging relational extracts.": "تنظيف البيانات وإصلاح تنسيقات التواريخ ودمج الجداول العلائقية.", "Time intelligence, iterator functions, and dynamic margin calculations.": "ذكاء الوقت ودوال التكرار وحسابات الهوامش الديناميكية.", "Exploring LookML-defined models for cross-team reporting.": "استكشاف نماذج LookML لإعداد تقارير مشتركة بين الفرق.", "Advanced modeling, pivot analysis, and rapid stakeholder mockups.": "نمذجة متقدمة وجداول محورية ونماذج أولية سريعة لأصحاب المصلحة.", "Writing and reading relational queries behind the data model.": "كتابة وقراءة استعلامات علائقية خلف نموذج البيانات.", "Scripting data checks and repetitive cleaning tasks.": "برمجة فحوصات البيانات ومهام التنظيف المتكررة.", "Structuring facts and dimensions for fast, reliable DAX.": "هيكلة جداول الحقائق والأبعاد لصيغ DAX سريعة وموثوقة.", "Iterating dashboards in short cycles with stakeholder feedback.": "تطوير اللوحات في دورات قصيرة بناءً على ملاحظات أصحاب المصلحة.", "Reading margin, discount, and liquidity data like a set of books.": "قراءة بيانات الهوامش والخصومات والسيولة كما تُقرأ الدفاتر المحاسبية.", "Flagging where discounting quietly erodes profit.": "رصد المواضع التي تلتهم فيها الخصومات الأرباح بصمت.", "Metrics-led content and traffic strategy from 7 years freelancing.": "استراتيجية محتوى وزيارات قائمة على المؤشرات من 7 سنوات في العمل الحر.", "Download CV": "تحميل السيرة الذاتية"});
+  const origText = new WeakMap();
+
+  function translateTextNodes(toAr){
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let n;
+    while((n = w.nextNode())){
+      const tag = n.parentNode && n.parentNode.nodeName;
+      if(tag==='SCRIPT' || tag==='STYLE') continue;
+      if(toAr){
+        const key = n.data.replace(/\s+/g,' ').trim();
+        if(key && AR[key]){
+          if(!origText.has(n)) origText.set(n, n.data);
+          const lead = (n.data.match(/^\s*/)||[''])[0], trail = (n.data.match(/\s*$/)||[''])[0];
+          n.data = lead + AR[key] + trail;
+        }
+      } else if(origText.has(n)){
+        n.data = origText.get(n);
+      }
+    }
+  }
+  function translateAttrs(toAr){
+    document.querySelectorAll('[placeholder],[aria-label],[title]').forEach(el=>{
+      ['placeholder','aria-label','title'].forEach(a=>{
+        if(!el.hasAttribute(a)) return;
+        const o = 'data-en-'+a;
+        if(toAr){
+          const key = el.getAttribute(a).replace(/\s+/g,' ').trim();
+          if(AR[key]){ if(!el.hasAttribute(o)) el.setAttribute(o, el.getAttribute(a)); el.setAttribute(a, AR[key]); }
+        } else if(el.hasAttribute(o)){ el.setAttribute(a, el.getAttribute(o)); }
+      });
+    });
+  }
+  function setLang(lang){
+    const ar = lang==='ar';
+    root.setAttribute('lang', ar ? 'ar' : 'en');
+    root.setAttribute('dir', ar ? 'rtl' : 'ltr');
+    translateTextNodes(ar);
+    translateAttrs(ar);
+    const lbl = document.getElementById('langLabel');
+    if(lbl) lbl.textContent = ar ? 'EN' : 'عربي';
+    store.set('rs-lang', ar ? 'ar' : 'en');
+  }
+  function setTheme(theme){
+    if(theme==='light') root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme');
+    store.set('rs-theme', theme);
+  }
+
+  document.getElementById('langToggle').addEventListener('click', ()=> setLang(root.lang==='ar' ? 'en' : 'ar'));
+  document.getElementById('themeToggle').addEventListener('click', ()=> setTheme(root.getAttribute('data-theme')==='light' ? 'dark' : 'light'));
+
+  if(store.get('rs-lang')==='ar') setLang('ar');
+})();
 </script>
 </body>
 </html>
